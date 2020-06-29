@@ -10,8 +10,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>me.dev.oliver</groupId>
+  <!-- 다른 프로젝트에서 참조하는 이름 -->
   <artifactId>youtube-sns</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <!-- 현재 프로젝트 이름 -->
   <name>youtube-sns</name>
   <description>Demo project for Spring Boot</description>
 
@@ -19,26 +21,33 @@
     <java.version>1.8</java.version>
   </properties>
 
-  <!-- 스프링부트에 필요한 의존성 자동으로 제공 -->
+
   <dependencies>
+    <!--
+    Spring MVC를 사용하는 RESTful 애플리케이션을 포함하여 웹 애플리케이션을 빌드하는 데 사용
+    기본 내장 컨테이너로 Tomcat을 사용 -->
+    <!-- spring-boot-starter-web이 Tomcat과 Spring MVC를 추가했기 때문에
+    자동 구성에서는 웹 응용 프로그램을 개발한다고 가정하고 이에 따라 Spring을 설정-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Getter Setter등을 간편히 에노테이션으로 사용할 수 있는 의존성을 제공 -->
+    <!-- Getter Setter등을 간편히 에노테이션으로 사용할 수 있는 의존성 주입 -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <!-- 프로젝트를 참조하고 있는 다른 프로젝트에 추이적으로 의존성이 추가되지 않음 -->
+      <!-- 프로젝트를 참조하고 있는 다른 프로젝트에 추이적으로 의존성이 주입되지 않음 -->
       <optional>true</optional>
     </dependency>
 
-    <!-- @SpringBootTest 어노테이션을 통해 스프링부트 어플리케이션 테스트에 필요한 거의 모든 의존성을 제공 -->
+    <!-- @SpringBootTest 에노테이션을 통해 스프링부트 애플리케이션 테스트에 필요한 거의 모든 의존성을 주입 -->
+    <!-- 모든 의존성 라이브러리 (JUnit, Spring Test & Spring Boot Test, AssertJ, Hamcrest, Mockito, JSONassert, JsonPath) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <!-- 의존 라이브러리 모두 제외시키기 -->
       <exclusions>
         <exclusion>
           <groupId>org.junit.vintage</groupId>
@@ -48,7 +57,7 @@
     </dependency>
   </dependencies>
 
-  <!-- maven 의존성을 추가(jar or war 패키징 할 수 있음, 빌드 정보 생성과 프로그램 시작) -->
+  <!-- maven 의존성을 주입(jar or war 패키징 할 수 있음, 빌드 정보 생성과 프로그램 시작) -->
   <build>
     <plugins>
       <plugin>
