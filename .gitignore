@@ -3,7 +3,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-HELP.md
+# HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -93,3 +93,13 @@ $RECYCLE.BIN/
 *.jar
 *.war
 *.ear
+
+# ignore all files in the help.md
+help.md
+
+# mvn file & directory
+mvnw
+mvnw.cmd
+.mvn/
+
+
