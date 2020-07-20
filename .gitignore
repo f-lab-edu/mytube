@@ -3,7 +3,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# HELP.md
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
