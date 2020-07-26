@@ -93,3 +93,13 @@ $RECYCLE.BIN/
 *.jar
 *.war
 *.ear
+
+# ignore all files in the help.md
+help.md
+
+# mvn file & directory
+mvnw
+mvnw.cmd
+.mvn/
+
+
