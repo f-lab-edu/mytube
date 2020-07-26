@@ -102,4 +102,7 @@ mvnw
 mvnw.cmd
 .mvn/
 
+# properties
+.properties
+
 

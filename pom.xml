@@ -33,6 +33,20 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <!-- 기본적으로  mybatis를 포함하고, mybatis-spring,
+      mybatis-spring-boot-autoconfigure(데이터베이스와 연동된 설정을 자동으로 해줌(SqlSessionTemplate을 사용한...)),,,,, -->
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.1.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <!-- 버전은 삭제(왜? mysql같이 자주 사용되는 모듈들에 대해서는 스프링 부트와 잘 어울리는 버전들을 스프링 부트가 직접 관리) -->
+    </dependency>
+
     <!-- Getter Setter등을 간편히 에노테이션으로 사용할 수 있는 의존성 명시 -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -40,6 +54,13 @@
       <!-- 프로젝트를 참조하고 있는 다른 프로젝트에 추이적으로 의존성이 명시되지 않음 -->
       <optional>true</optional>
     </dependency>
+
+    <!--  hibernate.validator 의존성 명시 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
 
     <!-- @SpringBootTest 에노테이션을 통해 스프링부트 애플리케이션 테스트에 필요한 거의 모든 의존성을 명시 -->
     <!-- 모든 의존성 라이브러리 (JUnit, Spring Test & Spring Boot Test, AssertJ, Hamcrest, Mockito, JSONassert, JsonPath) -->

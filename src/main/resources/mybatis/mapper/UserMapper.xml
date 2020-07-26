@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="me.dev.oliver.youtubesns.mapper.UserMapper">
+  <!-- *는 되도록이면 피하자. 성능저하가 된다. -->
+  <select id="getUser" resultType="UserDto">
+    SELECT id, user_id, pw, name, email, addr, signup_date, phone FROM user WHERE id=#{id}
+  </select>
+
+  <select id="getUserList" resultType="UserDto">
+    SELECT id, user_id, pw, name, email, addr, signup_date, phone FROM user
+  </select>
+
+  <insert id="insertUser" parameterType="UserDto">
+    INSERT INTO user (user_id, pw, name, email, addr, signup_date, phone)
+    VALUES(#{user_id}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
+  </insert>
+
+  <update id="changePassword" parameterType="UserDto">
+    UPDATE user SET pw=#{pw} WHERE id=#{id}
+  </update>
+
+  <delete id="deleteUser" parameterType="int">
+    DELETE FROM user WHERE id=#{id}
+  </delete>
+
+</mapper>
