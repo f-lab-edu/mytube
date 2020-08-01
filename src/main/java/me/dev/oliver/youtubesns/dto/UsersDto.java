@@ -9,18 +9,20 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-@Getter @Setter
-public class UserDto {
+@Getter
+@Setter // 회원 추가시 UsersDto 변수에 담아 insert시 사용하기 때문에 필요함
+public class UsersDto {
   // @NotBlank : null을 허용하지 않음, 적어도 white-space가 아닌 문자가 한개 이상 포함되어야 함 - null과 빈 공백 문자열(" ")을 허용하지 않음
   // @NotEmpty : null과 공백 문자열("") 을 허용하지 않음
   // @Pattern : 정규표현식에 맞는 문자열이어야 함
   // @Email : 이메일 양식이어야 함
+
   // 아이디
   private Integer id;
 
   // 유저 아이디
   @NotEmpty(message = "아이디는 필수 입니다")
-  private String user_id;
+  private String userId;
 
   // 비밀번호
   @NotBlank(message = "비밀번호는 필수 입니다")
@@ -44,7 +46,7 @@ public class UserDto {
   private String addr;
 
   // 가입 날짜
-  private Date signup_date;
+  private Date signupDate;
 
   // 핸드폰
   @NotEmpty(message = "핸드폰 번호는 필수 입니다")

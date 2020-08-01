@@ -103,6 +103,6 @@ mvnw.cmd
 .mvn/
 
 # properties
-.properties
+**/*.properties
 
 

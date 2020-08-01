@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace ="me.dev.oliver.youtubesns.mapper.UserMapper">
+<mapper namespace ="me.dev.oliver.youtubesns.mapper.UsersMapper">
   <!-- *는 되도록이면 피하자. 성능저하가 된다. -->
-  <select id="getUser" resultType="UserDto">
-    SELECT id, user_id, pw, name, email, addr, signup_date, phone FROM user WHERE id=#{id}
+
+  <!-- id 회원 조회 -->
+  <select id="getUser" resultType="UsersDto">
+    SELECT id, user_id "userId", pw, name, email, addr, signup_date "signupDate", phone FROM users WHERE id=#{id}
   </select>
 
-  <select id="getUserList" resultType="UserDto">
-    SELECT id, user_id, pw, name, email, addr, signup_date, phone FROM user
-  </select>
-
-  <insert id="insertUser" parameterType="UserDto">
-    INSERT INTO user (user_id, pw, name, email, addr, signup_date, phone)
-    VALUES(#{user_id}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
+  <!-- 회원 추가 -->
+  <insert id="insertUser" parameterType="UsersDto">
+    INSERT INTO users (user_id , pw, name, email, addr, signup_date, phone)
+    VALUES(#{userId}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
   </insert>
 
-  <update id="changePassword" parameterType="UserDto">
-    UPDATE user SET pw=#{pw} WHERE id=#{id}
+  <!-- 회원 비밀번호 변경 -->
+  <update id="changePassword" parameterType="UsersDto">
+    UPDATE users SET pw=#{pw} WHERE id=#{id}
   </update>
 
+  <!-- 회원 삭제 -->
   <delete id="deleteUser" parameterType="int">
-    DELETE FROM user WHERE id=#{id}
+    DELETE FROM users WHERE id=#{id}
   </delete>
 
 </mapper>

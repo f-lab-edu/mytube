@@ -36,7 +36,12 @@
     <dependency>
       <groupId>org.mybatis.spring.boot</groupId>
       <!-- 기본적으로  mybatis를 포함하고, mybatis-spring,
-      mybatis-spring-boot-autoconfigure(데이터베이스와 연동된 설정을 자동으로 해줌(SqlSessionTemplate을 사용한...)),,,,, -->
+      mybatis-spring-boot-autoconfigure(데이터베이스와 연동된 설정을 자동으로 해줌)를 포함 -->
+      <!-- Mybatis Documentation 의하면 아래와 같은 것을 설정
+      - 존재하는 DataSource 자동감지
+      - SqlSeessionFactoryBean을 사용해서 해당 데이터소스를 전달하는 SqlSessionFactory의 객체를 생성하고 등록
+      - SqlSessionFactory을 이용해 SqlSessionTemplate의 객체를 생성하고 등록
+      - 매퍼들을 자동스캔한 뒤 스캔된 것들을 SqlSessionTemplate에 연결하고 Spring Context에 등록해서 당신의 빈들에 주입할 수 있게 해줌 -->
       <artifactId>mybatis-spring-boot-starter</artifactId>
       <version>2.1.3</version>
     </dependency>
@@ -44,7 +49,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <!-- 버전은 삭제(왜? mysql같이 자주 사용되는 모듈들에 대해서는 스프링 부트와 잘 어울리는 버전들을 스프링 부트가 직접 관리) -->
+      <!-- mysql같이 자주 사용되는 모듈들에 대해서는 스프링 부트와 잘 어울리는 버전들을 스프링 부트가 직접 관리하기 때문에 버전은 생략이 가능 -->
     </dependency>
 
     <!-- Getter Setter등을 간편히 에노테이션으로 사용할 수 있는 의존성 명시 -->
