@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace ="me.dev.oliver.youtubesns.mapper.UsersMapper">
-  <!-- *는 되도록이면 피하자. 성능저하가 된다. -->
-
-  <!-- id 회원 조회 -->
-  <select id="getUser" resultType="UsersDto">
-    SELECT id, user_id "userId", pw, name, email, addr, signup_date "signupDate", phone FROM users WHERE id=#{id}
-  </select>
+<mapper namespace ="me.dev.oliver.youtubesns.mapper.UserMapper">
+  <!-- *는 되도록이면 피하자. 성능저하가 됨. -->
 
   <!-- 회원 추가 -->
-  <insert id="insertUser" parameterType="UsersDto">
-    INSERT INTO users (user_id , pw, name, email, addr, signup_date, phone)
+  <insert id="insertUser" parameterType="UserDto">
+    INSERT INTO user (user_id, pw, name, email, addr, signup_date, phone)
     VALUES(#{userId}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
   </insert>
 
   <!-- 회원 비밀번호 변경 -->
-  <update id="changePassword" parameterType="UsersDto">
-    UPDATE users SET pw=#{pw} WHERE id=#{id}
+  <update id="changePassword" parameterType="UserDto">
+    UPDATE user SET pw=#{pw} WHERE id=#{id}
   </update>
 
   <!-- 회원 삭제 -->
-  <delete id="deleteUser" parameterType="int">
-    DELETE FROM users WHERE id=#{id}
+  <delete id="deleteUser" parameterType="UserDto">
+    DELETE FROM user WHERE user_id=#{userId} and pw=#{pw}
   </delete>
+
+  <!-- 회원 여부 확인 -->
+  <select id="checkUser" parameterType="UserDto" resultType="_int">
+    SELECT id FROM user WHERE user_id=#{userId} and pw=#{pw}
+  </select>
+
+  <!-- 아이디 중복 체크 -->
+  <select id="idCheck" resultType="_int">
+    SELECT count(*) FROM user WHERE user_id=#{userId}
+  </select>
 
 </mapper>
