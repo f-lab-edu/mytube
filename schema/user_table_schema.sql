@@ -1,7 +1,7 @@
 -- user Table Create SQL
 CREATE TABLE user
 (
-    `id`           INT             NOT NULL    COMMENT '아이디', 
+    `id`           INT             NOT NULL    AUTO_INCREMENT    COMMENT '아이디', 
     `user_id`      CHAR(20)        NOT NULL    COMMENT '유저 아이디', 
     `pw`           CHAR(20)        NOT NULL    COMMENT '비밀번호', 
     `name`         CHAR(20)        NOT NULL    COMMENT '이름', 

@@ -12,6 +12,3 @@
 - ERD
 
   ![image](https://user-images.githubusercontent.com/55625864/89203219-2998c800-d5ef-11ea-91df-632bfbb96256.png)
-
-
-
