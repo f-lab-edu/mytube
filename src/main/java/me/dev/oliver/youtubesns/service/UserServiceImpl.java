@@ -2,6 +2,7 @@ package me.dev.oliver.youtubesns.service;
 
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.mapper.UserMapper;
+import me.dev.oliver.youtubesns.security.SecurityUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
   public void changeUserPw(UserDto user, String newPw) throws Exception {
     int id = checkUser(user);
-    if(id > 0) {
+    if (id > 0) {
       user = new UserDto(id, newPw);
-      userMapper.changePassword(user);
+      userMapper.updatePassword(user);
     }
   }
 
@@ -31,18 +32,19 @@ public class UserServiceImpl implements UserService {
 
   // id와 pw 확인
   private int checkUser(UserDto user) {
-    int id = 0;
     try {
-      id = userMapper.checkUser(user);
-    }catch (Exception e) {
+      int id = userMapper.checkUser(user);
+      if (id > 0) {
+        return id;
+      }
+    } catch (Exception e) {
     }
-    if(id != 0) return id;
-    else return 0;
+
+    return 0;
   }
 
-  public int idCheck(UserDto user) {
-    int result = userMapper.idCheck(user);
-    return result;
+  public boolean isExistsId(UserDto user) {
+    return userMapper.isExistsId(user);
   }
 
 }

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace ="me.dev.oliver.youtubesns.mapper.UserMapper">
-  <!-- *는 되도록이면 피하자. 성능저하가 됨. -->
+<mapper namespace="me.dev.oliver.youtubesns.mapper.UserMapper">
+  <!-- *는 되도록이면 피하자. 가독성이 떨어지고, 성능저하가 됨.
+  비록 이것이 적기 편할 수 있지만, 쿼리를 완료하기 위해서 더 많은 시간을 필요로 한다.
+  필요한 일부 컬럼만을 선택함으로써 결과 테이블의 크기를 줄이고 네트워크 트래픽을 감소시킴으로써 쿼리의 평균 속도를 높일 수 있다.-->
 
   <!-- 회원 추가 -->
   <insert id="insertUser" parameterType="UserDto">
@@ -11,7 +14,7 @@
   </insert>
 
   <!-- 회원 비밀번호 변경 -->
-  <update id="changePassword" parameterType="UserDto">
+  <update id="updatePassword" parameterType="UserDto">
     UPDATE user SET pw=#{pw} WHERE id=#{id}
   </update>
 
@@ -25,9 +28,12 @@
     SELECT id FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 
-  <!-- 아이디 중복 체크 -->
-  <select id="idCheck" resultType="_int">
-    SELECT count(*) FROM user WHERE user_id=#{userId}
+  <!--
+  as success하는 이유는 결과 column 이름이
+  EXISTS (select * from 테이블이름 where 컬럼=찾는 값) 이렇게 길게 나옴.
+  success 값이 1, 0 으로 나와서 파싱하기 편함. -->
+  <select id="isExistsId" resultType="boolean">
+    SELECT EXISTS (SELECT * FROM user WHERE user_id=#{userId}) AS success;
   </select>
 
 </mapper>
