@@ -22,11 +22,11 @@ public interface UserMapper {
 
   int insertUser(UserDto user);
 
-  int updatePassword(UserDto user);
+  int updatePassword(String userId, String pw);
 
-  int deleteUser(UserDto user);
+  int deleteUser(String userId);
 
-  int checkUser(UserDto user); // 회원 id와 pw 확인
+  boolean checkIdAndPw(String userId, String pw); // 회원 id와 pw 확인
 
-  boolean isExistsId(UserDto user); // 아이디 중복체크
+  boolean isExistsId(String userId);
 }

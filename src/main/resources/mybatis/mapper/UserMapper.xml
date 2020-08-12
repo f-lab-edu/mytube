@@ -14,17 +14,17 @@
   </insert>
 
   <!-- 회원 비밀번호 변경 -->
-  <update id="updatePassword" parameterType="UserDto">
-    UPDATE user SET pw=#{pw} WHERE id=#{id}
+  <update id="updatePassword">
+    UPDATE user SET pw=#{pw} WHERE user_id=#{userId}
   </update>
 
   <!-- 회원 삭제 -->
-  <delete id="deleteUser" parameterType="UserDto">
-    DELETE FROM user WHERE user_id=#{userId} and pw=#{pw}
+  <delete id="deleteUser">
+    DELETE FROM user WHERE user_id=#{userId}
   </delete>
 
   <!-- 회원 여부 확인 -->
-  <select id="checkUser" parameterType="UserDto" resultType="_int">
+  <select id="checkIdAndPw" resultType="_boolean">
     SELECT id FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 
@@ -32,7 +32,7 @@
   as success하는 이유는 결과 column 이름이
   EXISTS (select * from 테이블이름 where 컬럼=찾는 값) 이렇게 길게 나옴.
   success 값이 1, 0 으로 나와서 파싱하기 편함. -->
-  <select id="isExistsId" resultType="boolean">
+  <select id="isExistsId" resultType="_boolean">
     SELECT EXISTS (SELECT * FROM user WHERE user_id=#{userId}) AS success;
   </select>
 

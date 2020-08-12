@@ -4,11 +4,11 @@ import me.dev.oliver.youtubesns.dto.UserDto;
 
 public interface UserService {
 
-  void registerUser(UserDto user);
+  void registerUser(UserDto user) ;
 
-  void changeUserPw(UserDto user, String newPw) throws Exception;
+  void changeUserPw(String userId, String pw, String newPw) ;
 
-  void deleteUser(UserDto user);
+  void deleteUser(String userId, String pw);
 
-  boolean isExistsId(UserDto user);
+  boolean isExistsId(String userId);
 }

@@ -6,9 +6,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
+// @Setter : Service단에서 비즈니스 로직으로써 암호화를 사용하여 저장하기 위해 사용함.
 @Getter
+@Setter
 public class UserDto {
 
   /**
@@ -17,8 +21,6 @@ public class UserDto {
    * @Pattern : 정규표현식에 맞는 문자열이어야 함
    * @Email : 이메일 양식이어야 함
    */
-
-  private int id;
 
   @NotEmpty(message = "아이디는 필수 입니다")
   private String userId;
@@ -43,37 +45,8 @@ public class UserDto {
   @NotEmpty(message = "주소는 필수 입니다")
   private String addr;
 
-  private Date signupDate;
-
   @NotEmpty(message = "핸드폰 번호는 필수 입니다")
   @Length(min = 1, max = 10, message = "전화 번호는 '-'를 제외하고 10자리 이하로 입력해 주세요")
   private String phone;
-
-  // 회원가입시 사용할 생성자
-  public UserDto(String userId, String pw, String name, String email, String addr, String phone) {
-    this.userId = userId;
-    this.pw = pw;
-    this.name = name;
-    this.email = email;
-    this.addr = addr;
-    this.phone = phone;
-  }
-
-  // 회원탈퇴를 위한 생성자, pw 변경을 위한 생성자
-  public UserDto(String userId, String pw) {
-    this.userId = userId;
-    this.pw = pw;
-  }
-
-  // pw 변경을 위한 생성자
-  public UserDto(int id, String pw) {
-    this.id = id;
-    this.pw = pw;
-  }
-
-  // userId 중복 확인을 위한 생성자
-  public UserDto(String userId) {
-    this.userId = userId;
-  }
 
 }
