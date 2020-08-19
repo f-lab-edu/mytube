@@ -4,9 +4,9 @@ import me.dev.oliver.youtubesns.dto.UserDto;
 
 public interface UserService {
 
-  void registerUser(UserDto user) ;
+  void insertUser(UserDto user);
 
-  void changeUserPw(String userId, String pw, String newPw) ;
+  void updateUserPw(String email, String pw, String newPw) ;
 
   void deleteUser(String userId, String pw);
 

@@ -15,7 +15,7 @@
 
   <!-- 회원 비밀번호 변경 -->
   <update id="updatePassword">
-    UPDATE user SET pw=#{pw} WHERE user_id=#{userId}
+    UPDATE user SET pw=#{pw} WHERE email=#{email}
   </update>
 
   <!-- 회원 삭제 -->
@@ -25,7 +25,7 @@
 
   <!-- 회원 여부 확인 -->
   <select id="checkIdAndPw" resultType="_boolean">
-    SELECT id FROM user WHERE user_id=#{userId} and pw=#{pw}
+    SELECT id FROM user WHERE pw=#{pw}
   </select>
 
   <!--
