@@ -24,12 +24,12 @@ public interface UserMapper {
 
   int insertUser(UserDto user);
 
-  int updatePassword(String email, String pw);
+  int updatePassword(String userId, String pw);
 
   int deleteUser(String userId);
 
-  /** 패스워드가 맞으면 true 아니면 false */
-  boolean checkPw(String pw);
+  /** Id와 패스워드가 맞으면 true 아니면 false */
+  boolean checkIdAndPw(String pw);
 
   boolean isExistsId(String userId);
 }

@@ -24,26 +24,21 @@ public class UserServiceImpl implements UserService {
    * 유저 정보 추가.
    *
    * @param user 유저를 등록에 사용할 유저 정보를 담은 객체.
-   * @throws SQLException             SQL 문법 또는 mybatis 예외
+   * @throws RuntimeException             SQL 문법 또는 mybatis 예외
    * @throws DuplicateMemberException sha 256 암호화 알고리즘 예외 NoSuchAlgorithmException.
    */
-  public void insertUser(UserDto user) {
+  public void insertUser(UserDto user) throws DuplicateMemberException{
 
-    try {
-      if (isExistsId(user.getUserId())) {
-        throw new DuplicateMemberException("중복된 아이디입니다.");
-      }
-
-      user.setPw(SecurityUtil.encryptSha256(user.getPw()));
-      if (userMapper.insertUser(user) != 1) {
-        throw new SQLException("유저 등록에 실패했습니다.");
-      }
-    } catch (DuplicateMemberException e) {
+    if (isExistsId(user.getUserId())) {
       log.error("중복된 아이디 입니다. 중복된 유저 아이디 : {}", user.getUserId());
-    } catch (SQLException e) {
-      log.error("userMapper.insertUser 매서드 실패. {}", user);
+      throw new DuplicateMemberException("중복된 아이디입니다.");
     }
-  }
+
+    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
+    if (userMapper.insertUser(user) != 1) {
+      throw new RuntimeException("유저 등록에 실패했습니다.");
+    }
+}
 
   /**
    * 사용자 패스워드 변경.
@@ -53,22 +48,20 @@ public class UserServiceImpl implements UserService {
    * @param userId id랑 이전 password랑 연결시켜 확인할 회원 id
    * @param oldPw  이전 password.
    * @param newPw  새로 변경할 password.
-   * @throws SQLException             SQL 문법 또는 mybatis 예외
+   * @throws RuntimeException         SQL 문법 또는 mybatis 예외
    * @throws IllegalArgumentException 패스워드 일치하지 않을시 예외
    */
-  public void updateUserPw(String email, String oldPw, String newPw) {
+  public void updateUserPw(String userId, String oldPw, String newPw) {
 
-    try {
-      if (checkPwAfterSignin(oldPw)) {
-        if (userMapper.updatePassword(email, SecurityUtil.encryptSha256(newPw)) != 1) {
-          throw new SQLException("");
-        }
-      } else {
-        throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
+    if (checkPwAfterSignin(oldPw)) {
+      if (userMapper.updatePassword(userId, SecurityUtil.encryptSha256(newPw)) != 1) {
+        log.error("userMapper.updatePassword 매서드 실패. {}", userId);
+        throw new RuntimeException("패스워드를 변경할 수 없습니다.");
       }
-    } catch (SQLException e) {
-      log.error("userMapper.updatePassword 매서드 실패. {}", email);
+    } else {
+      throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
     }
+
   }
 
   /**
@@ -78,22 +71,20 @@ public class UserServiceImpl implements UserService {
    *
    * @param userId 유저 삭제 확인차 필요한 유저 id
    * @param pw     유저 삭제시 확인차 필요한 password
-   * @throws SQLException             SQL 문법 또는 mybatis 예외
+   * @throws RuntimeException         SQL 문법 또는 mybatis 예외
    * @throws IllegalArgumentException 패스워드 일치하지 않을시 예외
    */
   public void deleteUser(String userId, String pw) {
 
-    try {
-      if (checkPwAfterSignin(pw)) {
-        if (userMapper.deleteUser(userId) != 1) {
-          throw new SQLException("유저 삭제 실패");
-        }
-      } else {
-        throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
+    if (checkPwAfterSignin(pw)) {
+      if (userMapper.deleteUser(userId) != 1) {
+        log.error("userMapper.deleteUser 실패");
+        throw new RuntimeException("유저 삭제 실패");
       }
-    } catch (SQLException e) {
-      log.error("userMapper.deleteUser 실패 {}", e);
+    } else {
+      throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
     }
+
   }
 
   /**
@@ -106,7 +97,7 @@ public class UserServiceImpl implements UserService {
    */
   private boolean checkPwAfterSignin(String pw) {
 
-    return userMapper.checkPw(SecurityUtil.encryptSha256(pw));
+    return userMapper.checkIdAndPw(SecurityUtil.encryptSha256(pw));
   }
 
   /**
