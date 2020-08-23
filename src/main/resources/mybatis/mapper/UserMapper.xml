@@ -15,7 +15,7 @@
 
   <!-- 회원 비밀번호 변경 -->
   <update id="updatePassword">
-    UPDATE user SET pw=#{pw} WHERE user_id=#{userId}
+    UPDATE user SET pw=#{newPw} WHERE user_id=#{userId}
   </update>
 
   <!-- 회원 삭제 -->
@@ -23,12 +23,9 @@
     DELETE FROM user WHERE user_id=#{userId}
   </delete>
 
-  <!-- 회원 여부 확인 -->
-  <select id="checkIdAndPw" resultType="_boolean">
-    SELECT (
-        SELECT id FROM user WHERE pw=#{pw} )
-    FROM user
-    WHERE user_id=#{userId}
+  <!-- 회원 패스워드 여부 확인 -->
+  <select id="checkPw" parameterType="UserDto" resultType="_boolean">
+    SELECT DISTINCT id FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 
   <!--

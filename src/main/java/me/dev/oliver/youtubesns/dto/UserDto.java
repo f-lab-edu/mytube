@@ -39,6 +39,10 @@ public class UserDto {
   @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", message = "비밀 번호는 8~20자리로 숫자와 특수 문자가 포함된 영문 대소문자로 입력해 주세요")
   private String pw;
 
+  @NotBlank(message = "비밀번호는 필수 입니다")
+  @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", message = "비밀 번호는 8~20자리로 숫자와 특수 문자가 포함된 영문 대소문자로 입력해 주세요")
+  private String newPw;
+
   @NotEmpty(message = "이름은 필수 입니다")
   private String name;
 

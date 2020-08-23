@@ -7,9 +7,9 @@ public interface UserService {
 
   void insertUser(UserDto user) throws DuplicateMemberException;
 
-  void updateUserPw(String userId, String pw, String newPw) ;
+  void updateUserPw(UserDto user) ;
 
-  void deleteUser(String userId, String pw);
+  void deleteUser(UserDto user);
 
   boolean isExistsId(String userId);
 }
