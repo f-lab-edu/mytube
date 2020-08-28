@@ -29,7 +29,7 @@ public interface UserMapper {
   int deleteUser(String userId);
 
   /** Id와 패스워드가 맞으면 true 아니면 false */
-  boolean checkPw(UserDto user);
+  boolean findByIdAndPw(UserDto user);
 
   boolean isExistsId(String userId);
 }

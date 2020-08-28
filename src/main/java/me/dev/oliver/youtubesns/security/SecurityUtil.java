@@ -2,7 +2,6 @@ package me.dev.oliver.youtubesns.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 
 /**

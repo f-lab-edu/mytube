@@ -5,9 +5,9 @@ import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 
 public interface UserService {
 
-  void insertUser(UserDto user) throws DuplicateMemberException;
+  void insertUser(UserDto user);
 
-  void updateUserPw(UserDto user) ;
+  void updateUserPw(UserDto user);
 
   void deleteUser(UserDto user);
 

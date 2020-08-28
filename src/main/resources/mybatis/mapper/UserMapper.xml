@@ -24,7 +24,7 @@
   </delete>
 
   <!-- 회원 패스워드 여부 확인 -->
-  <select id="checkPw" parameterType="UserDto" resultType="_boolean">
+  <select id="findByIdAndPw" parameterType="UserDto" resultType="_boolean">
     SELECT DISTINCT id FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 

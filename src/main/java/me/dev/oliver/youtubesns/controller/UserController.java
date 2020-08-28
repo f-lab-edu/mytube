@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -32,7 +31,7 @@ public class UserController {
    * @param user 회원 등록할 user 정보를 가지고 있음.
    */
   @PostMapping
-  public void registerUser(@RequestBody UserDto user) throws DuplicateMemberException {
+  public void registerUser(@RequestBody UserDto user) {
 
     userService.insertUser(user);
   }
