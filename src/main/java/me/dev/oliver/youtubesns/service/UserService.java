@@ -1,7 +1,6 @@
 package me.dev.oliver.youtubesns.service;
 
 import me.dev.oliver.youtubesns.dto.UserDto;
-import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 
 public interface UserService {
 

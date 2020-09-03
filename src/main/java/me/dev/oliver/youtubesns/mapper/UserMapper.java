@@ -32,4 +32,5 @@ public interface UserMapper {
   boolean findByIdAndPw(UserDto user);
 
   boolean isExistsId(String userId);
+
 }
