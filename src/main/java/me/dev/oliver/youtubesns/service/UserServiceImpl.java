@@ -3,10 +3,9 @@ package me.dev.oliver.youtubesns.service;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.mapper.UserMapper;
-import me.dev.oliver.youtubesns.security.SecurityUtil;
+import me.dev.oliver.youtubesns.util.SecurityUtil;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Exception은 수많은 자식클래스를 가지고 있음. 그 중 RuntimeException을 주목해야 함. RuntimeException은 CheckedException과
@@ -111,7 +110,7 @@ public class UserServiceImpl implements UserService {
    * @param user 확인 시 필요한 userId, password.
    * @return id와 password 확인 시 일치 하면 true, 아니면 false.
    */
-  private boolean findByIdAndPw(UserDto user) {
+  public boolean findByIdAndPw(UserDto user) {
 
     return userMapper.findByIdAndPw(user);
   }

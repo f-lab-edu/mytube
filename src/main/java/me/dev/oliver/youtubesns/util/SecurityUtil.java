@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.security;
+package me.dev.oliver.youtubesns.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

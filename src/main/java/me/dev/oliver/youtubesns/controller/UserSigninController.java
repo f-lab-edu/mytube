@@ -23,21 +23,17 @@ public class UserSigninController {
 
   /**
    * @param user userId, pw를 받기위한 user 객체.
-   * @param request Service단에서 Httpsession을 생성하기 위한 request.
    */
   @PostMapping("/signin")
-  public void signin(@RequestBody UserDto user, HttpServletRequest request) {
+  public void signin(@RequestBody UserDto user) {
 
-    userSigninService.signin(user, request);
+    userSigninService.signin(user);
   }
 
-  /**
-   * @param request Service단에서 Httpsession을 생성하기 위한 request.
-   */
   @PostMapping("/signout")
-  public void signout(HttpServletRequest request) {
+  public void signout() {
 
-    userSigninService.signout(request);
+    userSigninService.signout();
   }
 
 }

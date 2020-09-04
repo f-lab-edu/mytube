@@ -10,5 +10,7 @@ public interface UserService {
 
   void deleteUser(UserDto user);
 
+  boolean findByIdAndPw(UserDto user);
+
   boolean isExistsId(String userId);
 }
