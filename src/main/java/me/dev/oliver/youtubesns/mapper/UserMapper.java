@@ -24,7 +24,11 @@ public interface UserMapper {
 
   int insertUser(UserDto user);
 
+  UserDto findByInfos(UserDto user);
+
   int updatePassword(UserDto user);
+
+  int updateUserAddr(UserDto user);
 
   int deleteUser(String userId);
 

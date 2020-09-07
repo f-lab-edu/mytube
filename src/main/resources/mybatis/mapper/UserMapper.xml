@@ -13,9 +13,18 @@
     VALUES(#{userId}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
   </insert>
 
+  <!-- 회원 정보 보기 -->
+  <select id="findByInfos" resultType="UserDto">
+    SELECT user_id, name, email, addr, phone FROM user WHERE user_id=#{userId} and pw=#{pw}
+  </select>
+
   <!-- 회원 비밀번호 변경 -->
   <update id="updatePassword">
-    UPDATE user SET pw=#{newPw} WHERE user_id=#{userId}
+    UPDATE user SET pw=#{newPw} WHERE user_id=#{userId} and pw=#{pw}
+  </update>
+
+  <update id="updateUserAddr">
+    UPDATE user SET addr=#{addr} WHERE user_id=#{userId}
   </update>
 
   <!-- 회원 삭제 -->

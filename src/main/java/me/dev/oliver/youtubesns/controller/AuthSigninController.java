@@ -1,6 +1,5 @@
 package me.dev.oliver.youtubesns.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.service.UserSigninService;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Controller
 @RequestMapping("/users")
-public class UserSigninController {
+public class AuthSigninController {
 
   private final UserSigninService userSigninService;
 
-  public UserSigninController(UserSigninService userSigninService) {
+  public AuthSigninController(UserSigninService userSigninService) {
 
     this.userSigninService = userSigninService;
   }

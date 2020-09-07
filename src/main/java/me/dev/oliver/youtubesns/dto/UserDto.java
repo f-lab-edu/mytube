@@ -56,4 +56,15 @@ public class UserDto {
   @Length(min = 1, max = 10, message = "전화 번호는 '-'를 제외하고 10자리 이하로 입력해 주세요")
   private String phone;
 
+  /**
+   * 회원 정보를 가져올 때 null 유무를 확인.
+   *
+   * @return user 정보에서 가져온 변수 값들이 하나라도 null이면 true 아니면 false.
+   */
+  public static boolean hasNullData(UserDto user) {
+    return user.getUserId() == null || user.getName() == null
+        || user.getEmail() == null || user.getAddr() == null
+        || user.getPhone() == null;
+  }
+
 }

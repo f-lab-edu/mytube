@@ -1,9 +1,9 @@
 package me.dev.oliver.youtubesns.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import me.dev.oliver.youtubesns.aop.UserIsSignedin;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.service.UserService;
-import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -37,13 +37,24 @@ public class UserController {
     userService.insertUser(user);
   }
 
+  /**
+   * 회원 정보를 수정하기 전에 pasword를 다시 요청함.
+   * @param user
+   */
+  @UserIsSignedin
+  @GetMapping("my-infos")
+  public UserDto userInfos(@RequestBody UserDto user) {
+
+    user = userService.getUserInfo(user);
+    return user;
+  }
 
   /**
    * 부연설명 : PATCH는 리소스의 부분 업데이트를 수행. URI는 리소스에 적용할 변경 내용을 지정.
    *
-   * @Param user 회원이 로그인할 때 사용하는 id, 회원 현재 password.
-   * @Param newPw 회원이 새롭게 생성할 password.
+   * @Param user 회원 현재 password or 회원이 새롭게 변경할 password.
    */
+  @UserIsSignedin
   @PatchMapping("/my-infos/password")
   public void changeUserPw(@RequestBody UserDto user) {
 
@@ -51,10 +62,21 @@ public class UserController {
   }
 
   /**
+   * @param user 회원 현재 address or 회원이 새롭게 변경할 address.
+   */
+  @UserIsSignedin
+  @PatchMapping("/my-infos/address")
+  public void changeUserAddr(@RequestBody UserDto user) {
+
+    userService.updateUserAddr(user);
+  }
+
+  /**
    * Delete는 지정된 URI의 리소스를 제거. userId와, password를 입력 받아서 성공하면 제거
    *
-   * @Param user userId 회원이 로그인할 때 사용하는 id, 회원 password.
+   * @Param user 회원 password.
    */
+  @UserIsSignedin
   @DeleteMapping("/my-infos")
   public void deleteUser(@RequestBody UserDto user) {
 

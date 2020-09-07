@@ -3,7 +3,6 @@ package me.dev.oliver.youtubesns.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import me.dev.oliver.youtubesns.dto.UserDto;
-import me.dev.oliver.youtubesns.mapper.UserMapper;
 import me.dev.oliver.youtubesns.util.SecurityUtil;
 import me.dev.oliver.youtubesns.util.SessionUtil;
 import org.springframework.stereotype.Service;

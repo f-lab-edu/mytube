@@ -6,7 +6,11 @@ public interface UserService {
 
   void insertUser(UserDto user);
 
+  UserDto getUserInfo(UserDto user);
+
   void updateUserPw(UserDto user);
+
+  void updateUserAddr(UserDto user);
 
   void deleteUser(UserDto user);
 
