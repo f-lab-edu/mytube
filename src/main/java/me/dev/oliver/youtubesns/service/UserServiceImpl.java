@@ -99,8 +99,6 @@ public class UserServiceImpl implements UserService {
    * @throws IllegalArgumentException 패스워드 일치하지 않을시 예외
    */
   public void updateUserPw(UserDto user) {
-    log.info(user.getUserId());
-    log.info(user.getAddr());
 
     user.setPw(SecurityUtil.encryptSha256(user.getPw()));
 
@@ -124,8 +122,6 @@ public class UserServiceImpl implements UserService {
    */
   public void updateUserAddr(UserDto user) {
 
-    log.info(user.getUserId());
-    log.info(user.getAddr());
     userMapper.updateUserAddr(user);
   }
 
