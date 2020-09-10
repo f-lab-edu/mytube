@@ -14,8 +14,8 @@
   </insert>
 
   <!-- 회원 정보 보기 -->
-  <select id="findByInfos" resultType="UserDto">
-    SELECT user_id, name, email, addr, phone FROM user WHERE user_id=#{userId} and pw=#{pw}
+  <select id="findByInfo" resultType="me.dev.oliver.youtubesns.dto.UserDto">
+    SELECT user_id "userId", name, email, addr, phone FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 
   <!-- 회원 비밀번호 변경 -->
@@ -33,7 +33,7 @@
   </delete>
 
   <!-- 회원 패스워드 여부 확인 -->
-  <select id="findByIdAndPw" parameterType="UserDto" resultType="_boolean">
+  <select id="findByIdAndPw" parameterType="UserDto" resultType="boolean">
     SELECT id FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 

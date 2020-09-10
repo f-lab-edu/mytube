@@ -1,8 +1,6 @@
 package me.dev.oliver.youtubesns.aop;
 
-import me.dev.oliver.youtubesns.util.SessionUtil;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import me.dev.oliver.youtubesns.config.SessionUtil;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.http.HttpStatus;
@@ -14,14 +12,14 @@ import org.springframework.web.client.HttpStatusCodeException;
  */
 @Component
 @Aspect
-public class UserIsSignedinAspect {
+public class LoginValidationAspect {
 
-  @Before("@annotation(UserIsSignedin)")
+  @Before("@annotation(LoginValidation)")
   public void userIsSignedin() {
 
-    String userId = SessionUtil.getAttribute("userId");
+    String userId = SessionUtil.getAttribute(SessionUtil.USER_ID);
     if(userId == null) {
-      throw new HttpStatusCodeException(HttpStatus.UNAUTHORIZED, "NO_SIGNIN") {};
+      throw new HttpStatusCodeException(HttpStatus.UNAUTHORIZED) {};
     }
   }
 

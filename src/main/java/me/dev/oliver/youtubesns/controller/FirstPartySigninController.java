@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Controller
 @RequestMapping("/users")
-public class AuthSigninController {
+public class FirstPartySigninController {
 
   private final UserSigninService userSigninService;
 
-  public AuthSigninController(UserSigninService userSigninService) {
+  public FirstPartySigninController(UserSigninService userSigninService) {
 
     this.userSigninService = userSigninService;
   }

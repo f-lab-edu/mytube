@@ -1,7 +1,8 @@
-package me.dev.oliver.youtubesns.util;
+package me.dev.oliver.youtubesns.config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,27 +16,33 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * <p>
  * getSession()에 false를 전달하면, 이미 생성된 세션이 있다면 반환하고 없으면 null을 반환 HttpSession session2 =
  * request.getSession(false);
+ * <p>
+ * 싱글톤 vs 정적 클래스
+ *
+ *  싱글톤은 인스턴스 생성가능, 힙에 저장, OOP 규칙을 준수, 상속가능, 인터페이스 구현 가능, 느슨하고, 비동기적인 초기화가 가능, 보통 첫 사용시 초기화.
+ *  static 클래스 보다 유연하고 상태를 유지할 수 있음. 메서드를 재정의 할 수 있음. 상태를 디스크에 저장하거나 원격으로 보내야 할 경우 필요한 직렬화 가능.
+ *
+ *  정적 클래스는 인스턴스 생성 불가능, 스택에 저장, OOP 규칙은 준수 하지 않음, 상속 불가능, 인터페이스 구현 불가능, 클래스가 포함하고 있는 프로그램 혹은
+ *  Namespace가 로드 될때 CLR(common language runtiom)에서 자동으로 로드 된다. 컴파일 시점에서 검사한다.
  */
+
+@Component
 public class SessionUtil {
+
+  public static final String USER_ID = "userId";
 
   private SessionUtil() {
   }
 
 
-  private static HttpSession getHttpSession() {
+  public static HttpSession getHttpSession() {
     HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder
         .getRequestAttributes()).getRequest();
+
+    if(req == null) throw new NullPointerException("HttpServletRequest 객체가 null입니다.");
+
     HttpSession session = req.getSession();
     return session;
-  }
-
-  /**
-   * @param key session name을 지정.
-   * @param obj 여러 종류의 객체를 저장하기 위해 지정.
-   */
-  public static void setAttribute(String key, Object obj) {
-
-    getHttpSession().setAttribute(key, obj);
   }
 
   /**

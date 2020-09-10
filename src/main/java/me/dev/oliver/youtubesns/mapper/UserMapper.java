@@ -24,7 +24,7 @@ public interface UserMapper {
 
   int insertUser(UserDto user);
 
-  UserDto findByInfos(UserDto user);
+  UserDto findByInfo(UserDto user);
 
   int updatePassword(UserDto user);
 
@@ -33,8 +33,8 @@ public interface UserMapper {
   int deleteUser(String userId);
 
   /** Id와 패스워드가 맞으면 true 아니면 false */
-  boolean findByIdAndPw(UserDto user);
+  Boolean findByIdAndPw(UserDto user);
 
-  boolean isExistsId(String userId);
+  Boolean isExistsId(String userId);
 
 }

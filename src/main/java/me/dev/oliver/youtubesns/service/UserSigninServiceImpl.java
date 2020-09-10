@@ -1,10 +1,11 @@
 package me.dev.oliver.youtubesns.service;
 
+import com.mysql.cj.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.util.SecurityUtil;
-import me.dev.oliver.youtubesns.util.SessionUtil;
+import me.dev.oliver.youtubesns.config.SessionUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,7 +30,7 @@ public class UserSigninServiceImpl implements UserSigninService {
     boolean result = userService.findByIdAndPw(user);
 
     if (result) {
-      SessionUtil.setAttribute("userId", user.getUserId());
+      SessionUtil.getHttpSession().setAttribute(SessionUtil.USER_ID, user.getUserId());
     } else {
       throw new IllegalArgumentException("로그인 실패, 아이디 또는 패스워드가 일치하지 않습니다.");
     }

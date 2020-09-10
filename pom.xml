@@ -82,7 +82,6 @@
       </exclusions>
     </dependency>
 
-    <!-- AOP(aspectJ, spring-aop) 의존성을 명시-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>

@@ -1,11 +1,11 @@
 package me.dev.oliver.youtubesns.service;
 
-import com.mysql.cj.Session;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.mapper.UserMapper;
 import me.dev.oliver.youtubesns.util.SecurityUtil;
-import me.dev.oliver.youtubesns.util.SessionUtil;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
   /**
    * 사용자 정보 가져오기.
    * <p>
-   * 로그인이 되어 있어야 함.
+   * 로그인이 되어 있어야 하고 더 비밀번호 체크를 해야함.
    * 로그인 유무는 Controller단에서 확인 했으니 여기서 userId null 유무는 pass.
    *
    * @param user
@@ -74,9 +74,14 @@ public class UserServiceImpl implements UserService {
    */
   public UserDto getUserInfo(UserDto user) {
 
-    setUserIdandPw(user);
+    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
 
-    user = userMapper.findByInfos(user);
+    if(UserDto.hasNullIdandPw(user)) {
+      throw new NullPointerException("아이디 또는 패스워드에 Null 값이 확인되었습니다.");
+    }
+
+    user = userMapper.findByInfo(user);
+
     if(UserDto.hasNullData(user)) {
       throw new NullPointerException("사용자 정보를 가져오던 중에 Null 값이 확인 되었습니다.");
     }
@@ -87,15 +92,17 @@ public class UserServiceImpl implements UserService {
   /**
    * 사용자 패스워드 변경.
    * <p>
-   * 로그인이 되어 있어야 함.
+   * 로그인이 되어 있어야 하고 비밀번호를 변경하려면 한번 더 비밀번호 체크를 해야함.
    *
    * @param user id랑 이전 password랑 연결시켜 확인할 회원 id, 이전 password, 새로 변경할 password.
    * @throws IllegalArgumentException SQL 문법 또는 mybatis 예외, 또는 SQL where 불일치
    * @throws IllegalArgumentException 패스워드 일치하지 않을시 예외
    */
   public void updateUserPw(UserDto user) {
+    log.info(user.getUserId());
+    log.info(user.getAddr());
 
-    setUserIdandPw(user);
+    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
 
     if (findByIdAndPw(user)) {
       user.setNewPw(SecurityUtil.encryptSha256(user.getNewPw()));
@@ -117,15 +124,15 @@ public class UserServiceImpl implements UserService {
    */
   public void updateUserAddr(UserDto user) {
 
-    setUserIdandPw(user);
-
+    log.info(user.getUserId());
+    log.info(user.getAddr());
     userMapper.updateUserAddr(user);
   }
 
   /**
    * 사용자 정보 삭제.
    * <p>
-   * 로그인이 되어 있어야 함.
+   * 로그인이 되어 있어야 하고 한번 더 비밀번호 체크를 해야함.
    *
    * @param user id랑 이전 password랑 연결시켜 확인할 회원 id, password.
    * @throws IllegalArgumentException SQL 문법 또는 mybatis 예외, 또는 SQL where 불일치
@@ -133,7 +140,7 @@ public class UserServiceImpl implements UserService {
    */
   public void deleteUser(UserDto user) {
 
-    setUserIdandPw(user);
+    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
 
     if (findByIdAndPw(user)) {
       if (userMapper.deleteUser(user.getUserId()) != 1) {
@@ -146,7 +153,7 @@ public class UserServiceImpl implements UserService {
   }
 
   /**
-   * Id와 pw를 확인.
+   * 아이디와 pw를 확인.
    * 이 메소드를 호출하기 전에 password를 암호화하여 사용해야 함.
    * <p>
    *
@@ -155,7 +162,7 @@ public class UserServiceImpl implements UserService {
    */
   public boolean findByIdAndPw(UserDto user) {
 
-    return userMapper.findByIdAndPw(user);
+    return Optional.ofNullable(userMapper.findByIdAndPw(user)).orElse(false);
   }
 
   /**
@@ -167,12 +174,6 @@ public class UserServiceImpl implements UserService {
   public boolean isExistsId(String userId) {
 
     return userMapper.isExistsId(userId);
-  }
-
-  private void setUserIdandPw(UserDto user) {
-
-    user.setUserId(SessionUtil.getAttribute("userId"));
-    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
   }
 
 }

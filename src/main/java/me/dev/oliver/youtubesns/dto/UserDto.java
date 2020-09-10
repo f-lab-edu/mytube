@@ -56,6 +56,10 @@ public class UserDto {
   @Length(min = 1, max = 10, message = "전화 번호는 '-'를 제외하고 10자리 이하로 입력해 주세요")
   private String phone;
 
+  public static boolean hasNullIdandPw(UserDto user) {
+    return user.getUserId() == null || user.getPw() == null;
+  }
+
   /**
    * 회원 정보를 가져올 때 null 유무를 확인.
    *
@@ -65,6 +69,12 @@ public class UserDto {
     return user.getUserId() == null || user.getName() == null
         || user.getEmail() == null || user.getAddr() == null
         || user.getPhone() == null;
+  }
+
+  @Override
+  public String toString() {
+    return "userId = " + userId + ", " + "name = " + name + ", " + "email = " + email + ", "
+        + "addr = " + addr + ", " + "phone = " + phone;
   }
 
 }
