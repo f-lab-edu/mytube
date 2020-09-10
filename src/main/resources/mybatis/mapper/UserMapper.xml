@@ -14,7 +14,7 @@
   </insert>
 
   <!-- 회원 정보 보기 -->
-  <select id="findByInfo" resultType="me.dev.oliver.youtubesns.dto.UserDto">
+  <select id="findByInfo" resultType="UserDto">
     SELECT user_id "userId", name, email, addr, phone FROM user WHERE user_id=#{userId} and pw=#{pw}
   </select>
 
