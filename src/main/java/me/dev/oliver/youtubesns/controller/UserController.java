@@ -1,5 +1,7 @@
 package me.dev.oliver.youtubesns.controller;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.aop.LoginValidation;
 import me.dev.oliver.youtubesns.dto.UserDto;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/users")
+@RequestMapping("users")
 public class UserController {
 
   private final UserService userService;
@@ -32,7 +34,7 @@ public class UserController {
    * @param user 회원 등록할 user 정보를 가지고 있음.
    */
   @PostMapping
-  public void registerUser(@RequestBody UserDto user) {
+  public void registerUser(@Valid @RequestBody UserDto user) {
 
     userService.insertUser(user);
   }
@@ -43,7 +45,7 @@ public class UserController {
    */
   @LoginValidation
   @GetMapping("my-infos")
-  public UserDto userInfos(@RequestBody UserDto user) {
+  public UserDto userInfos(@Valid @RequestBody UserDto user) {
 
     user = userService.getUserInfo(user);
     return user;
@@ -56,7 +58,7 @@ public class UserController {
    */
   @LoginValidation
   @PatchMapping("my-infos/password")
-  public void changeUserPw(@RequestBody UserDto user) {
+  public void changeUserPw(@Valid @RequestBody UserDto user) {
 
     userService.updateUserPw(user);
   }
@@ -66,7 +68,7 @@ public class UserController {
    */
   @LoginValidation
   @PatchMapping("my-infos/address")
-  public void changeUserAddr(@RequestBody UserDto user) {
+  public void changeUserAddr(@Valid @RequestBody UserDto user) {
 
     userService.updateUserAddr(user);
   }
@@ -78,7 +80,7 @@ public class UserController {
    */
   @LoginValidation
   @DeleteMapping("my-infos")
-  public void deleteUser(@RequestBody UserDto user) {
+  public void deleteUser(@Valid @RequestBody UserDto user) {
 
     userService.deleteUser(user);
   }
@@ -90,7 +92,7 @@ public class UserController {
    * @Param userId 회원이 로그인할 때 사용하는 id.
    */
   @GetMapping("{userId}/duplicate")
-  public boolean isExistsId(@PathVariable("userId") String userId) {
+  public boolean isExistsId(@Valid @PathVariable("userId") String userId) {
 
     return userService.isExistsId(userId);
   }

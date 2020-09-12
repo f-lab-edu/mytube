@@ -71,10 +71,4 @@ public class UserDto {
         || user.getPhone() == null;
   }
 
-  @Override
-  public String toString() {
-    return "userId = " + userId + ", " + "name = " + name + ", " + "email = " + email + ", "
-        + "addr = " + addr + ", " + "phone = " + phone;
-  }
-
 }

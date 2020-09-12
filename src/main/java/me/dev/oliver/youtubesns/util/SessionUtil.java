@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.config;
+package me.dev.oliver.youtubesns.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,19 +29,21 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class SessionUtil {
 
-  public static final String USER_ID = "userId";
-
   private SessionUtil() {
   }
 
 
   public static HttpSession getHttpSession() {
-    HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder
-        .getRequestAttributes()).getRequest();
 
-    if(req == null) throw new NullPointerException("HttpServletRequest 객체가 null입니다.");
-
+    HttpServletRequest req = null;
+    try {
+      req = ((ServletRequestAttributes) RequestContextHolder
+          .getRequestAttributes()).getRequest();
+    } catch (NullPointerException e) {
+      throw new NullPointerException("HttpServletRequest 객체가 Null값입니다. " + e);
+    }
     HttpSession session = req.getSession();
+
     return session;
   }
 

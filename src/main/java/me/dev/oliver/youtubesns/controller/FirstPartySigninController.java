@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Controller
-@RequestMapping("/users")
+@RequestMapping("users")
 public class FirstPartySigninController {
 
   private final UserSigninService userSigninService;
@@ -23,13 +23,13 @@ public class FirstPartySigninController {
   /**
    * @param user userId, pw를 받기위한 user 객체.
    */
-  @PostMapping("/signin")
+  @PostMapping("signin")
   public void signin(@RequestBody UserDto user) {
 
     userSigninService.signin(user);
   }
 
-  @PostMapping("/signout")
+  @PostMapping("signout")
   public void signout() {
 
     userSigninService.signout();
