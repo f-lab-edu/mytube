@@ -26,10 +26,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * Namespace가 로드 될때 CLR(common language runtiom)에서 자동으로 로드 된다. 컴파일 시점에서 검사한다.
  * <p>
  * 개발자가 코드를 잘 작업하면 예외가 나지 않는 상황이 있을텐데 예외처리를 하는 이유는? 예외 처리는 예외가 발생한 상황에서 프로그램을 종료하지 않고 가능한 한 예외를
- * 핸들링하여 프로그램의 흐름을 복구하고, 의도하는 방향으로 프로그램을 수행할 수 있게 하는 것을 의미합니다.
- * 예외상황이 발생하게 되면 개발자 또는 사용자에게 예외에 대한 상황에 대해서 알려 프로그램을 빠르게 처리하기 위해서 예외처리를 하게 됩니다.
- * 예외 처리를 사용하는 목적은 조금 더 안정적이고 오류에 강한 프로그램을 만드는 것입니다. 그래서 이것을 충족시키기 위해서는 예외를 다뤄 프로그램이 동작하는것에 있어서 큰
- * 도움이 됩니다.
+ * 핸들링하여 프로그램의 흐름을 복구하고, 의도하는 방향으로 프로그램을 수행할 수 있게 하는 것을 의미합니다. 예외상황이 발생하게 되면 개발자 또는 사용자에게 예외에 대한 상황에
+ * 대해서 알려 프로그램을 빠르게 처리하기 위해서 예외처리를 하게 됩니다. 예외 처리를 사용하는 목적은 조금 더 안정적이고 오류에 강한 프로그램을 만드는 것입니다. 그래서 이것을
+ * 충족시키기 위해서는 예외를 다뤄 프로그램이 동작하는것에 있어서 큰 도움이 됩니다.
  */
 
 @Component
@@ -42,12 +41,14 @@ public class SessionUtil {
   public static HttpSession getHttpSession() {
 
     HttpServletRequest req = null;
-    try {
+
+    if (((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
+        != null) {
+
       req = ((ServletRequestAttributes) RequestContextHolder
           .getRequestAttributes()).getRequest();
-    } catch (NullPointerException e) {
-      throw new NullPointerException("HttpServletRequest 객체가 Null값입니다. " + e);
     }
+
     HttpSession session = req.getSession();
 
     return session;
