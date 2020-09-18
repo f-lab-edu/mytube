@@ -40,16 +40,15 @@ public class SessionUtil {
 
   public static HttpSession getHttpSession() {
 
-    HttpServletRequest req = null;
+    HttpSession session = null;
+    HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder
+        .getRequestAttributes()).getRequest();
 
-    if (((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
-        != null) {
-
-      req = ((ServletRequestAttributes) RequestContextHolder
-          .getRequestAttributes()).getRequest();
+    if (req != null) {
+      session = req.getSession();
+    } else {
+      throw new NullPointerException("HttpServletRequest 생성 도중에 null이 확인되었습니다.");
     }
-
-    HttpSession session = req.getSession();
 
     return session;
   }
