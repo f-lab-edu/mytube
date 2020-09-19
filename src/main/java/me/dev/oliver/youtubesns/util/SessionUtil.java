@@ -2,6 +2,7 @@ package me.dev.oliver.youtubesns.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -31,6 +32,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * 충족시키기 위해서는 예외를 다뤄 프로그램이 동작하는것에 있어서 큰 도움이 됩니다.
  */
 
+@Slf4j
 @Component
 public class SessionUtil {
 
@@ -47,7 +49,9 @@ public class SessionUtil {
     if (req != null) {
       session = req.getSession();
     } else {
-      throw new NullPointerException("HttpServletRequest 생성 도중에 null이 확인되었습니다.");
+      log.error("HttpServletRequest 생성 도중에 null이 확인되었습니다.");
+      throw new IllegalArgumentException("서버 정보 읽기 실패");
+
     }
 
     return session;
