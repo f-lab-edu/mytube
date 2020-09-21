@@ -50,8 +50,7 @@ public class SessionUtil {
       session = req.getSession();
     } else {
       log.error("HttpServletRequest 생성 도중에 null이 확인되었습니다.");
-      throw new IllegalArgumentException("서버 정보 읽기 실패");
-
+      throw new IllegalArgumentException("서버에서 사용자의 정보를 불러오는 도중 예상치 못한 에러가 발생했습니다");
     }
 
     return session;
