@@ -34,9 +34,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Slf4j
 @Component
-public class SessionUtil {
+public class LoginSessionUtil {
 
-  private SessionUtil() {
+  private LoginSessionUtil() {
   }
 
 
@@ -61,7 +61,7 @@ public class SessionUtil {
    *
    * @param key session name을 지정.
    */
-  public static String getAttribute(String key) {
+  public static String LoginUser(String key) {
 
     return (String) getHttpSession().getAttribute(key);
   }
@@ -69,7 +69,7 @@ public class SessionUtil {
   /**
    * 세션을 유효하지 않게 설정 (세션에 저장된 모든 값을 삭제). session.invalidate();
    */
-  public static void invaldateSession() {
+  public static void logoutUser() {
 
     getHttpSession().invalidate();
   }

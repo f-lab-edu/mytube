@@ -1,7 +1,7 @@
 package me.dev.oliver.youtubesns.controller;
 
 import me.dev.oliver.youtubesns.dto.UserDto;
-import me.dev.oliver.youtubesns.service.UserSigninService;
+import me.dev.oliver.youtubesns.service.UserLoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Controller
 @RequestMapping("users")
-public class FirstPartySigninController {
+public class FirstPartyLoginController {
 
-  private final UserSigninService userSigninService;
+  private final UserLoginService userLoginService;
 
-  public FirstPartySigninController(UserSigninService userSigninService) {
+  public FirstPartyLoginController(UserLoginService userLoginService) {
 
-    this.userSigninService = userSigninService;
+    this.userLoginService = userLoginService;
   }
 
   /**
@@ -26,13 +26,13 @@ public class FirstPartySigninController {
   @PostMapping("signin")
   public void signin(@RequestBody UserDto user) {
 
-    userSigninService.signin(user);
+    userLoginService.signin(user);
   }
 
   @PostMapping("signout")
   public void signout() {
 
-    userSigninService.signout();
+    userLoginService.signout();
   }
 
 }
