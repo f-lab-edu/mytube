@@ -101,7 +101,6 @@ public class UserServiceImpl implements UserService {
   public void updateUserPw(UserDto user) {
 
     user.setPw(SecurityUtil.encryptSha256(user.getPw()));
-
     if (findByIdAndPw(user)) {
       user.setNewPw(SecurityUtil.encryptSha256(user.getNewPw()));
       if (userMapper.updatePassword(user) != 1) {

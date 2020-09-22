@@ -10,7 +10,9 @@ import me.dev.oliver.youtubesns.dto.UserDto;
  */
 public interface UserLoginService {
 
-  boolean signin(UserDto user);
+  boolean login(UserDto user);
 
-  void signout();
+  void logout();
+
+  boolean isLogin();
 }

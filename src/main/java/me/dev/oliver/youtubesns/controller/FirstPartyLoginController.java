@@ -23,16 +23,16 @@ public class FirstPartyLoginController {
   /**
    * @param user userId, pw를 받기위한 user 객체.
    */
-  @PostMapping("signin")
-  public void signin(@RequestBody UserDto user) {
+  @PostMapping("login")
+  public void login(@RequestBody UserDto user) {
 
-    userLoginService.signin(user);
+    userLoginService.login(user);
   }
 
-  @PostMapping("signout")
-  public void signout() {
+  @PostMapping("logout")
+  public void logout() {
 
-    userLoginService.signout();
+    userLoginService.logout();
   }
 
 }
