@@ -19,7 +19,7 @@ public class LoginValidationAspect {
   private final LoginService loginService;
 
   @Before("@annotation(LoginValidation)")
-  public void userIsLogin() {
+  public void userLoginValidation() {
 
     String userId = loginService.getLoginId();
     if (userId == null) {

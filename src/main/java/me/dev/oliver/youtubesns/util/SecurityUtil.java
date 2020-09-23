@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * StringBuilder는 변경가능한 문자열이지만 동기화(synchronized)가 적용되지 않음. 하지만 StringBuffer는
  * thread-safe라는 말에서처럼 변경가능하지만 multiple thread환경에서 안전한 클래스. StringBuffer는 multi thread환경에서 다른 값을
  * 변경하지 못하도록 하므로 web이나 소켓환경과 같이 비동기로 동작하는 경우가 많을 때는 StringBuffer를 사용하는 것이 안전함.
- * 그러나 thread-safe는 thread-safe 속성으로 인해 StringBuffer 성능이 저하되므로 단점도 있음.
+ * 그러나 thread-safe는 thread-safe 속성으로 인해 StringBuffer 성능이 저하되는 단점도 있음.
  * 따라서 StringBuilder는 각 클래스의 동일한 메서드를 호출 할 때 StringBuffer보다 빠름.
  *
  * String
