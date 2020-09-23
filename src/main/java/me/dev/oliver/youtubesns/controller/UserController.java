@@ -1,7 +1,7 @@
 package me.dev.oliver.youtubesns.controller;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.aop.LoginValidation;
 import me.dev.oliver.youtubesns.dto.UserDto;
@@ -16,17 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("users")
 public class UserController {
 
   private final UserService userService;
-
-  public UserController(UserService userService) {
-
-    this.userService = userService;
-  }
-
 
   /**
    * 부연설명 : Post는 지정된 URI에 새 리소스를 만듦.

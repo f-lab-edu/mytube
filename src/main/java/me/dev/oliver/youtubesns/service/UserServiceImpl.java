@@ -1,6 +1,7 @@
 package me.dev.oliver.youtubesns.service;
 
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.mapper.UserMapper;
@@ -29,17 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
  * 예외를 발생시키면, `rollback` 처리를 자동 수행해준다.
  */
 @Slf4j
+@AllArgsConstructor
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
   private final UserMapper userMapper;
-
-
-  public UserServiceImpl(UserMapper userMapper) {
-
-    this.userMapper = userMapper;
-  }
 
   /**
    * 사용자 정보 추가.

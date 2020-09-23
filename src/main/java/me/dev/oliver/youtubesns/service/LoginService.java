@@ -2,9 +2,9 @@ package me.dev.oliver.youtubesns.service;
 
 public interface LoginService {
 
-  void sessionLogin(String key, Object value);
+  void login(String key, Object value);
 
-  String getSessionLoginId(String key);
+  String getLoginId();
 
-  void sessionLogout();
+  void logout();
 }

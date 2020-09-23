@@ -3,14 +3,14 @@ package me.dev.oliver.youtubesns.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import me.dev.oliver.youtubesns.util.SessionKeys;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- * UserLoginService와 분리 시키기 위해 사용됨. Service단에서는 Sevlet의 존재를 알필요가 없음. Session은 로그인 뿐만 아니라 장바구니 구현 등에도 사용될 수
- * 있기 때문에 확장의 가능성이 있음. 상태 정보 유지의 행위를 추상화. 세션을 이용해 동작을 제공하는 클래스로 만들어서 사용함.
+ * UserLoginService와 분리 시키기 위해 사용됨. Service단에서는 Sevlet의 존재를 알필요가 없음. Session은 로그인 뿐만 아니라 장바구니 구현 등에도
+ * 사용될 수 있기 때문에 확장의 가능성이 있음. 상태 정보 유지의 행위를 추상화. 세션을 이용해 동작을 제공하는 클래스로 만들어서 사용함.
  * <p>
  * <p>
  * HttpSession session = request.getSession(); 서버에 생성된 세션이 있다면 세션을 반환하고 없다면 새롭게 세션을 생성하여 반환 새롭게 생성된
@@ -37,7 +37,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Slf4j
 @Service
-public class SessionLoginServiceImpl implements LoginService{
+public class SessionLoginServiceImpl implements LoginService {
 
   private SessionLoginServiceImpl() {
   }
@@ -62,29 +62,28 @@ public class SessionLoginServiceImpl implements LoginService{
   /**
    * 세션 키값 지정.
    *
-   * @param key session key를 지정.
+   * @param key    session key를 지정.
    * @param userId session key에 대한 value 지정.
    */
-  public void sessionLogin(String key, Object userId) {
+  public void login(String key, Object userId) {
 
     getHttpSession().setAttribute(key, userId);
   }
 
   /**
-   * 해당 키값을 확인한 후 value값을 반환
+   * userId값을 확인한 후 value값을 반환
    *
-   * @param key session key를 지정.
    * @return key에 대한 value를 return.
    */
-  public String getSessionLoginId(String key) {
+  public String getLoginId() {
 
-    return (String) getHttpSession().getAttribute(key);
+    return (String) getHttpSession().getAttribute(SessionKeys.USER_ID);
   }
 
   /**
    * 세션을 유효하지 않게 설정 (세션에 저장된 모든 값을 삭제). session.invalidate();
    */
-  public void sessionLogout() {
+  public void logout() {
 
     getHttpSession().invalidate();
   }

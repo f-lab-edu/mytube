@@ -103,14 +103,6 @@
         Spring Boot 응용 프로그램을 실행하며 빌드 정보를 생성하고 시작할 수 있습니다. -->
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 
