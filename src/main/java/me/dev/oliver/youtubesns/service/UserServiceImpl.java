@@ -1,9 +1,12 @@
 package me.dev.oliver.youtubesns.service;
 
+import java.util.Optional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.youtubesns.dto.UserDto;
 import me.dev.oliver.youtubesns.mapper.UserMapper;
-import me.dev.oliver.youtubesns.security.SecurityUtil;
+import me.dev.oliver.youtubesns.util.SecurityUtil;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,21 +25,20 @@ import org.springframework.transaction.annotation.Transactional;
  * 예외 처리 방법 : 예외복구, 예외처리 회피, 예외 전환
  *
  * IllegalArgumentException : 허용하지 않는 값이 인수로 건네졌을 때(null은 * 따로 NullPointerException으로 처리).
+ *
+ * Transactional annotation : 프록시 객체가 생성되고 `begin`, `commit`을 자동 수행해준다.
+ * 예외를 발생시키면, `rollback` 처리를 자동 수행해준다.
  */
 @Slf4j
+@AllArgsConstructor
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
   private final UserMapper userMapper;
 
-
-  public UserServiceImpl(UserMapper userMapper) {
-
-    this.userMapper = userMapper;
-  }
-
   /**
-   * 유저 정보 추가.
+   * 사용자 정보 추가.
    *
    * @param user 유저를 등록에 사용할 유저 정보를 담은 객체.
    * @throws DuplicateKeyException    중복된 아이디 예외.
@@ -57,9 +59,36 @@ public class UserServiceImpl implements UserService {
   }
 
   /**
+   * 사용자 정보 가져오기.
+   * <p>
+   * 로그인이 되어 있어야 하고 더 비밀번호 체크를 해야함.
+   * 로그인 유무는 Controller단에서 확인 했으니 여기서 userId null 유무는 pass.
+   *
+   * @param user
+   * @throws NullPointerException 리턴된 데이터 중에 하나라도 null이면 예외처리.
+   * @return 유저 정보를 return.
+   */
+  public UserDto getUserInfo(UserDto user) {
+
+    user.setPw(SecurityUtil.encryptSha256(user.getPw()));
+
+    if(UserDto.hasNullIdandPw(user)) {
+      throw new NullPointerException("아이디 또는 패스워드에 Null 값이 확인되었습니다.");
+    }
+
+    user = userMapper.findByInfo(user);
+
+    if(UserDto.hasNullData(user)) {
+      throw new NullPointerException("사용자 정보를 가져오던 중에 Null 값이 확인 되었습니다.");
+    }
+
+    return user;
+  }
+
+  /**
    * 사용자 패스워드 변경.
    * <p>
-   * ******추후에 로그인이 되어 있는지 확인하는 로직 추가해야함******
+   * 로그인이 되어 있어야 하고 비밀번호를 변경하려면 한번 더 비밀번호 체크를 해야함.
    *
    * @param user id랑 이전 password랑 연결시켜 확인할 회원 id, 이전 password, 새로 변경할 password.
    * @throws IllegalArgumentException SQL 문법 또는 mybatis 예외, 또는 SQL where 불일치
@@ -68,7 +97,6 @@ public class UserServiceImpl implements UserService {
   public void updateUserPw(UserDto user) {
 
     user.setPw(SecurityUtil.encryptSha256(user.getPw()));
-
     if (findByIdAndPw(user)) {
       user.setNewPw(SecurityUtil.encryptSha256(user.getNewPw()));
       if (userMapper.updatePassword(user) != 1) {
@@ -81,11 +109,23 @@ public class UserServiceImpl implements UserService {
   }
 
   /**
+   * 사용자 주소 변경.
+   * <p>
+   * 로그인이 되어 있어야 함.
+   *
+   * @param user 사용자 pw
+   */
+  public void updateUserAddr(UserDto user) {
+
+    userMapper.updateUserAddr(user);
+  }
+
+  /**
    * 사용자 정보 삭제.
    * <p>
-   * ******추후에 로그인이 되어있는지 확인하는 로직 추가해야함******
+   * 로그인이 되어 있어야 하고 한번 더 비밀번호 체크를 해야함.
    *
-   * @param user id랑 이전 password랑 연결시켜 확인할 회원 id, 이전 password.
+   * @param user id랑 이전 password랑 연결시켜 확인할 회원 id, password.
    * @throws IllegalArgumentException SQL 문법 또는 mybatis 예외, 또는 SQL where 불일치
    * @throws IllegalArgumentException 패스워드 일치하지 않을시 예외
    */
@@ -104,16 +144,16 @@ public class UserServiceImpl implements UserService {
   }
 
   /**
-   * Id와 pw를 확인.
+   * 아이디와 pw를 확인.
    * 이 메소드를 호출하기 전에 password를 암호화하여 사용해야 함.
    * <p>
    *
    * @param user 확인 시 필요한 userId, password.
    * @return id와 password 확인 시 일치 하면 true, 아니면 false.
    */
-  private boolean findByIdAndPw(UserDto user) {
+  public boolean findByIdAndPw(UserDto user) {
 
-    return userMapper.findByIdAndPw(user);
+    return Optional.ofNullable(userMapper.findByIdAndPw(user)).orElse(false);
   }
 
   /**
