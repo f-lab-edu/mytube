@@ -27,8 +27,7 @@ CREATE TABLE board
     `like_count`       INT             NOT NULL    COMMENT '좋아요 개수', 
     `bad_count`        INT             NOT NULL    COMMENT '싫어요 개수', 
     `hits`             INT             NOT NULL    COMMENT '조회수', 
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    PRIMARY KEY (id)
 );
 
 ALTER TABLE board COMMENT '게시글';
@@ -44,12 +43,7 @@ CREATE TABLE user_board
     `subscrip_count`          INT            NOT NULL    COMMENT '구독 개수',
     `after_watch_video_list`  INT            NOT NULL    COMMENT '나중에 보다 동영상 목록',
     `new_play_list`           INT            NOT NULL    COMMENT '새 재생 목록',
-    PRIMARY KEY (post_count),
-    FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    FOREIGN KEY (like_list) REFERENCES board (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-	FOREIGN KEY (dibs_list) REFERENCES board (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-	FOREIGN KEY (after_watch_video_list) REFERENCES board (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    FOREIGN KEY (new_play_list) REFERENCES board (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    PRIMARY KEY (post_count)
 );
 
 ALTER TABLE user_board COMMENT '유저 게시글 관련 정보';
