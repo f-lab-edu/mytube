@@ -11,4 +11,14 @@
 
 - ERD
 
-  ![image](https://user-images.githubusercontent.com/55625864/89203219-2998c800-d5ef-11ea-91df-632bfbb96256.png)
+  ![image](https://user-images.githubusercontent.com/55625864/95864236-11d48180-0da0-11eb-8363-8a5f88a986e1.png)
+  
+- 카카오 오븐 Image preveal
+
+  ![image](https://user-images.githubusercontent.com/55625864/95865285-76441080-0da1-11eb-9c71-1b914002ea11.png)
+
+  ![image](https://user-images.githubusercontent.com/55625864/95865758-f9fdfd00-0da1-11eb-99a7-828246fddea0.png)
+
+  
+
+  
