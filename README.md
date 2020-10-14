@@ -13,7 +13,9 @@
 
   - 외래키는 ERD에서만 시각적으로 표시하고 사용 안함.
   
-  ![image](https://user-images.githubusercontent.com/55625864/95864236-11d48180-0da0-11eb-8363-8a5f88a986e1.png)
+  ![image](https://user-images.githubusercontent.com/55625864/95953661-18610880-0e35-11eb-8acb-6308c4e7f8df.png)
+  
+  
   
 - 카카오 오븐 Image preveal
 
