@@ -14,6 +14,10 @@ public class BoardDto {
   @NotBlank
   private String detailContents;
 
+  private String createdAt;
+
+  private String updatedAt;
+
   private Integer likeCount;
 
   private Integer badCount;

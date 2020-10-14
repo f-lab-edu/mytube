@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.dev.oliver.youtubesns.mapper.BoardMapper">
+
+  <insert id="insertBoard" parameterType="BoardDto">
+    INSERT INTO board (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
+    VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
+  </insert>
+</mapper>

@@ -9,7 +9,7 @@
 
   <!-- 회원 추가 -->
   <insert id="insertUser" parameterType="UserDto">
-    INSERT INTO user (user_id, pw, name, email, addr, signup_date, phone)
+    INSERT INTO user (user_id, pw, name, email, addr, created_at, phone)
     VALUES(#{userId}, #{pw}, #{name}, #{email}, #{addr}, now(), #{phone})
   </insert>
 
