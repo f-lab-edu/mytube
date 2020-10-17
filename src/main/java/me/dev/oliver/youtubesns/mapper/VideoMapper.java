@@ -1,12 +1,12 @@
 package me.dev.oliver.youtubesns.mapper;
 
-import me.dev.oliver.youtubesns.dto.BoardDto;
+import me.dev.oliver.youtubesns.dto.VideoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface BoardMapper {
+public interface VideoMapper {
 
-  int insertBoard(BoardDto boardDto);
+  int insertVideo(VideoDto videoDto);
 }

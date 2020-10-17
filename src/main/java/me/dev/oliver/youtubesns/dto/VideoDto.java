@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 
 @Getter
-public class BoardDto {
+public class VideoDto {
 
   private String userId;
 
@@ -26,5 +26,7 @@ public class BoardDto {
    * 조회수
    */
   private Integer hits;
+
+  private String fileUrl;
 
 }
