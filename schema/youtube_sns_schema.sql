@@ -17,7 +17,7 @@ CREATE TABLE user
 ALTER TABLE user COMMENT '회원 정보';
 
 -- user Table Create SQL
-CREATE TABLE board
+CREATE TABLE video
 (
     `id`               INT             NOT NULL    AUTO_INCREMENT COMMENT '아이디',
     `user_id`          CHAR(20)        NOT NULL    COMMENT '유저 아이디', 
@@ -31,10 +31,10 @@ CREATE TABLE board
     PRIMARY KEY (id)
 );
 
-ALTER TABLE board COMMENT '게시글';
+ALTER TABLE video COMMENT '게시글';
 
 -- user Table Create SQL
-CREATE TABLE user_board
+CREATE TABLE user_video
 (
     `user_id`                 CHAR(20)       NOT NULL    COMMENT '유저 아이디',
     `like_list`               INT            NOT NULL    COMMENT '좋아요 목록을 위해서',
@@ -47,5 +47,5 @@ CREATE TABLE user_board
     PRIMARY KEY (post_count)
 );
 
-ALTER TABLE user_board COMMENT '유저 게시글 관련 정보';
+ALTER TABLE user_video COMMENT '유저 게시글 관련 정보';
         
