@@ -53,7 +53,7 @@ ALTER TABLE user_video COMMENT '유저 게시글 관련 정보';
 -- user Table Create SQL
 CREATE TABLE video_file
 (
-    `id`         INT            NOT NULL    COMMENT '아이디', 
+    `id`         INT            NOT NULL    AUTO_INCREMENT	COMMENT '아이디', 
     `file_url`   VARCHAR(45)    NOT NULL    COMMENT '파일 url', 
     `file_size`  INT            NOT NULL    COMMENT '파일 크기', 
     PRIMARY KEY (id)
