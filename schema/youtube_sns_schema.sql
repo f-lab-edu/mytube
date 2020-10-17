@@ -28,6 +28,7 @@ CREATE TABLE video
     `like_count`       INT             NOT NULL    COMMENT '좋아요 개수', 
     `bad_count`        INT             NOT NULL    COMMENT '싫어요 개수', 
     `hits`             INT             NOT NULL    COMMENT '조회수', 
+    `file_url`		   VARCHAR(45)	   NOT NULL	   COMMENT '파일 url',
     PRIMARY KEY (id)
 );
 
