@@ -9,11 +9,13 @@
     - 프로젝트 컨벤션
     - wiki URL : [wiki 공유](https://github.com/f-lab-edu/youtube-sns/wiki)
 
+
+
 - ERD
 
   - 외래키는 ERD에서만 시각적으로 표시하고 사용 안함.
   
-  ![image](https://user-images.githubusercontent.com/55625864/95953661-18610880-0e35-11eb-8acb-6308c4e7f8df.png)
+  ![image](https://user-images.githubusercontent.com/55625864/96366417-7b7ad400-1182-11eb-992b-6aa54b38a98e.png)
   
   
   
