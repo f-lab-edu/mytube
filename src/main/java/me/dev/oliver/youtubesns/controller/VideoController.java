@@ -29,6 +29,11 @@ public class VideoController {
     videoService.insertVideo(multipartFile);
   }
 
+  /**
+   * 동영상 내의 세부 사항 업로드
+   *
+   * @param videoDto userId, title, detail contents를 받아옴
+   */
   @PostMapping("more-details/upload")
   public void uploadMoreDetail(@Valid @RequestBody VideoDto videoDto) {
 

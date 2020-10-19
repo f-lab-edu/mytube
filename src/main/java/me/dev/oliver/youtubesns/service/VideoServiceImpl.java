@@ -18,7 +18,7 @@ public class VideoServiceImpl implements VideoService {
   private final VideoMapper videoMapper;
 
   /**
-   * 게시물 추가 및 쓰기, file size는 byte 단위로 저장됨
+   * 동영상 업로드, file size는 byte 단위로 저장됨
    *
    * @param multipartFile 게시물 관련 정보를 담은 객체
    */
@@ -47,6 +47,11 @@ public class VideoServiceImpl implements VideoService {
     }
   }
 
+  /**
+   * 동영상 컨텐츠 내의 세부사항 기록 db에 저장
+   *
+   * @param videoDto userId, title, detail contents를 가져옴
+   */
   public void insertMoreDetail(VideoDto videoDto) {
 
     videoMapper.insertMoreDetail(videoDto);
