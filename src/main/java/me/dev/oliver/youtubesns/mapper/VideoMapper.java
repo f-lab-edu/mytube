@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface VideoMapper {
 
   int insertVideo(VideoDto videoDto);
+
+  int insertMoreDetail(VideoDto videoDto);
 }

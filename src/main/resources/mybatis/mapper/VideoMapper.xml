@@ -4,13 +4,14 @@
 
 <mapper namespace="me.dev.oliver.youtubesns.mapper.VideoMapper">
 
-  <insert id="insertVideo" parameterType="VideoDto">
+  <insert id="insertVideo">
+    INSERT INTO video_file (file_url, file_size)
+    VALUES (#{fileUrl}, #{fileSize})
+  </insert>
+
+  <insert id="insertMoreDetail" parameterType="VideoDto">
     INSERT INTO video (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
     VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
   </insert>
 
-  <insert id="insertVideoFile">
-    INSERT INTO video_file (file_url)
-    VALUES (#{fileUrl})
-  </insert>
 </mapper>

@@ -13,21 +13,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("video")
+@RequestMapping("videos-contents")
 public class VideoController {
 
   private final VideoService videoService;
 
-  @PostMapping("my-video/upload")
-  public String uploadVideo(@RequestParam MultipartFile multipartFile) {
+  /**
+   * 동영상 업로드
+   *
+   * @param multipartFile 동영상 파일을 받아옴
+   */
+  @PostMapping("upload")
+  public void uploadVideo(@RequestParam("videoFile") MultipartFile multipartFile) {
 
     videoService.insertVideo(multipartFile);
-
-    return "redirect:my-contents/upload";
   }
 
-  @PostMapping("my-contents/upload")
-  public void uploadContents(@Valid @RequestBody VideoDto videoDto) {
-    // 작성중...
+  @PostMapping("more-details/upload")
+  public void uploadMoreDetail(@Valid @RequestBody VideoDto videoDto) {
+
+    videoService.insertMoreDetail(videoDto);
   }
 }

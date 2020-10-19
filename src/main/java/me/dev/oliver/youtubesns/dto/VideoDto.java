@@ -18,15 +18,22 @@ public class VideoDto {
 
   private String updatedAt;
 
-  private Integer likeCount;
+  private int likeCount;
 
-  private Integer badCount;
+  private int badCount;
 
   /**
    * 조회수
    */
-  private Integer hits;
+  private int hits;
 
   private String fileUrl;
+
+  private long fileSize;
+
+  public VideoDto(String fileUrl, long fileSize) {
+    this.fileUrl = fileUrl;
+    this.fileSize = fileSize;
+  }
 
 }
