@@ -6,6 +6,8 @@ import lombok.Getter;
 @Getter
 public class VideoDto {
 
+  private Integer id;
+
   private String userId;
 
   @NotBlank
@@ -18,9 +20,9 @@ public class VideoDto {
 
   private String updatedAt;
 
-  private int likeCount;
+  private Integer likeCount;
 
-  private int badCount;
+  private Integer badCount;
 
   /**
    * 조회수
@@ -31,7 +33,13 @@ public class VideoDto {
 
   private long fileSize;
 
+  public VideoDto(int id) {
+
+    this.id = id;
+  }
+
   public VideoDto(String fileUrl, long fileSize) {
+
     this.fileUrl = fileUrl;
     this.fileSize = fileSize;
   }

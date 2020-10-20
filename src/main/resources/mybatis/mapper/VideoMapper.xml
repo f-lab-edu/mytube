@@ -4,14 +4,25 @@
 
 <mapper namespace="me.dev.oliver.youtubesns.mapper.VideoMapper">
 
+  <!-- 동영상 파일 내용 업로드 -->
   <insert id="insertVideo">
     INSERT INTO video_file (file_url, file_size)
     VALUES (#{fileUrl}, #{fileSize})
   </insert>
 
+  <!-- 동영상 세부사항 업로드 -->
   <insert id="insertMoreDetail" parameterType="VideoDto">
     INSERT INTO video (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
     VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
   </insert>
 
+  <!-- 동영상 url 확인 -->
+  <select id="findByVideoUrl" resultType="VideoDto">
+    SELECT file_url "fileUrl" FROM video_file WHERE id=#{id}
+  </select>
+
+  <!-- 동영상 세부사항 확인 -->
+  <select id="findByMoreDetail" resultType="VideoDto">
+    SELECT user_id, title, detail_contents, updated_at, like_count, bad_count, hits FROM video WHERE id=#{id}
+  </select>
 </mapper>

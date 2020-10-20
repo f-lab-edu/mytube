@@ -11,4 +11,8 @@ public interface VideoMapper {
   int insertVideo(VideoDto videoDto);
 
   int insertMoreDetail(VideoDto videoDto);
+
+  VideoDto findByVideoUrl(int id);
+
+  VideoDto findByMoreDetail(int id);
 }

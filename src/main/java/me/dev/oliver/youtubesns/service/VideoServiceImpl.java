@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.net.URL;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.dev.oliver.youtubesns.aop.LoginValidation;
 import me.dev.oliver.youtubesns.dto.VideoDto;
 import me.dev.oliver.youtubesns.mapper.VideoMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
+@Transactional
 @AllArgsConstructor
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -22,6 +25,7 @@ public class VideoServiceImpl implements VideoService {
    *
    * @param multipartFile 게시물 관련 정보를 담은 객체
    */
+  @LoginValidation
   public void insertVideo(MultipartFile multipartFile) {
 
     String fileName = multipartFile.getOriginalFilename();
@@ -52,8 +56,23 @@ public class VideoServiceImpl implements VideoService {
    *
    * @param videoDto userId, title, detail contents를 가져옴
    */
+  @LoginValidation
   public void insertMoreDetail(VideoDto videoDto) {
 
     videoMapper.insertMoreDetail(videoDto);
+  }
+
+  @LoginValidation
+  public VideoDto findByVideoUrl(int id) {
+
+    VideoDto videoDto = new VideoDto(id);
+    return videoMapper.findByVideoUrl(id);
+  }
+
+  @LoginValidation
+  public VideoDto findByMoreDetail(int id) {
+
+    VideoDto videoDto = new VideoDto(id);
+    return videoMapper.findByMoreDetail(id);
   }
 }

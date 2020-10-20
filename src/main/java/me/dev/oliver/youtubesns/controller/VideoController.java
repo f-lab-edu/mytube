@@ -4,6 +4,8 @@ import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import me.dev.oliver.youtubesns.dto.VideoDto;
 import me.dev.oliver.youtubesns.service.VideoService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +40,23 @@ public class VideoController {
   public void uploadMoreDetail(@Valid @RequestBody VideoDto videoDto) {
 
     videoService.insertMoreDetail(videoDto);
+  }
+
+  /**
+   * video를 보기 위한 내용물을 모두 가져온다.
+   *
+   * @param id
+   * @return
+   */
+  @GetMapping("{id}/videoUrl")
+  public VideoDto videoUrl(@PathVariable int id) {
+
+    return videoService.findByVideoUrl(id);
+  }
+
+  @GetMapping("{id}/more-detail")
+  public VideoDto moreDetail(@PathVariable int id) {
+
+    return videoService.findByMoreDetail(id);
   }
 }

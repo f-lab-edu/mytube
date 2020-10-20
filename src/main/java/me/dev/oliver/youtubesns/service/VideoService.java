@@ -8,4 +8,8 @@ public interface VideoService {
   void insertVideo (MultipartFile multipartFile);
 
   void insertMoreDetail (VideoDto videoDto);
+
+  VideoDto findByVideoUrl(int id);
+
+  VideoDto findByMoreDetail(int id);
 }
