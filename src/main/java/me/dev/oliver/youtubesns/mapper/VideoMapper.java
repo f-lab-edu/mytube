@@ -10,5 +10,5 @@ public interface VideoMapper {
 
   int insertVideo(VideoDto videoDto);
 
-  int insertMoreDetail(VideoDto videoDto);
+  int insertDetailInfo(VideoDto videoDto);
 }

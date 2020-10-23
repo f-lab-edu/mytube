@@ -9,7 +9,7 @@
     VALUES (#{fileUrl}, #{fileSize})
   </insert>
 
-  <insert id="insertMoreDetail" parameterType="VideoDto">
+  <insert id="insertDetailInfo" parameterType="VideoDto">
     INSERT INTO video (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
     VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
   </insert>
