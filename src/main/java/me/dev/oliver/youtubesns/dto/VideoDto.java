@@ -1,9 +1,11 @@
 package me.dev.oliver.youtubesns.dto;
 
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class VideoDto {
 
   private final String userId;
@@ -30,14 +32,5 @@ public class VideoDto {
   private final String fileUrl;
 
   private final long fileSize;
-
-  public VideoDto(String fileUrl, long fileSize, String userId, String title,
-      String detailContents) {
-    this.fileUrl = fileUrl;
-    this.fileSize = fileSize;
-    this.userId = userId;
-    this.title = title;
-    this.detailContents = detailContents;
-  }
 
 }

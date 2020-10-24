@@ -44,7 +44,13 @@ public class VideoServiceImpl implements VideoService {
       String fileUrl = targetFile.toURI().toURL().getFile();
       long fileSize = multipartFile.getSize();
 
-      VideoDto videoDto = new VideoDto(fileUrl, fileSize, userId, title, detailContents);
+      VideoDto videoDto = VideoDto.builder()
+          .userId(userId)
+          .title(title)
+          .detailContents(detailContents)
+          .fileUrl(fileUrl)
+          .fileSize(fileSize)
+          .build();
       videoMapper.insertVideo(videoDto);
       videoMapper.insertDetailInfo(videoDto);
     } catch (IOException e) {
