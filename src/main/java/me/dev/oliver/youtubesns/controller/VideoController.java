@@ -2,6 +2,7 @@ package me.dev.oliver.youtubesns.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import me.dev.oliver.youtubesns.dto.VideoDto;
 import me.dev.oliver.youtubesns.service.VideoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,11 @@ public class VideoController {
     return videoService.findByVideoUrl(id);
   }
 
+  /**
+   *
+   * @param id
+   * @return
+   */
   @GetMapping("{id}/more-detail")
   public VideoDto moreDetail(@PathVariable int id) {
 

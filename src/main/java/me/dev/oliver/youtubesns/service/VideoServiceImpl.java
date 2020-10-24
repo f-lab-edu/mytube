@@ -30,6 +30,7 @@ public class VideoServiceImpl implements VideoService {
    * @param detailContents 동영상에 대한 세부 내용
    */
 
+  @LoginValidation
   public void uploadVideo(MultipartFile multipartFile, String userId, String title,
       String detailContents) {
 
@@ -58,4 +59,17 @@ public class VideoServiceImpl implements VideoService {
     }
   }
 
+  @LoginValidation
+  public VideoDto findByVideoUrl(int id) {
+
+    VideoDto videoDto = new VideoDto(id);
+    return videoMapper.findByVideoUrl(id);
+  }
+
+  @LoginValidation
+  public VideoDto findByMoreDetail(int id) {
+
+    VideoDto videoDto = new VideoDto(id);
+    return videoMapper.findByMoreDetail(id);
+  }
 }

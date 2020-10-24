@@ -8,13 +8,13 @@ public class VideoDto {
 
   private Integer id;
 
-  private final String userId;
+  private String userId;
 
   @NotBlank
-  private final String title;
+  private String title;
 
   @NotBlank
-  private final String detailContents;
+  private String detailContents;
 
   private String createdAt;
 
@@ -29,17 +29,23 @@ public class VideoDto {
    */
   private int hits;
 
-  private final String fileUrl;
+  private String fileUrl;
 
-  private final long fileSize;
+  private long fileSize;
 
   public VideoDto(int id) {
 
     this.id = id;
   }
 
+  public VideoDto(String fileUrl) {
+
+    this.fileUrl = fileUrl;
+  }
+
   public VideoDto(String fileUrl, long fileSize, String userId, String title,
       String detailContents) {
+
     this.fileUrl = fileUrl;
     this.fileSize = fileSize;
     this.userId = userId;
