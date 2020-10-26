@@ -21,13 +21,13 @@ public class VideoController {
    *
    * @param multipartFile 동영상 파일을 및 userId, title, detail contents를 받아옴
    */
-  @PostMapping("upload") // @Valid @RequestBody VideoDto videoDto
+  @PostMapping
   public void uploadVideo(@RequestParam("fileVideo") MultipartFile multipartFile,
-      @Valid @RequestParam String userId, @Valid @RequestParam String title,
+      @Valid @RequestParam String userId,
+      @Valid @RequestParam String title,
       @Valid @RequestParam String detailContents) {
 
     videoService.uploadVideo(multipartFile, userId, title, detailContents);
   }
-
 
 }
