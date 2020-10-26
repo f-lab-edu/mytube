@@ -91,16 +91,16 @@
 
   <!-- maven 의존성을 명시(jar or war 패키징 할 수 있음, 빌드 정보 생성과 프로그램 시작) -->
   <!-- maven plugin: 메이븐은 여러 플러그인으로 구성되어 있으며,
-  각각의 플러그인은 하나 이상의 goal(명령, 작업)을 포함하고있다. Goal은 Maven의 실행단위이다.
+  각각의 플러그인은 하나 이상의 goal(명령, 작업)을 포함하고있다. Goal은 Maven의 실행단위이다
   메이븐은 여러 goal을 묶어서 lifecycle phases 로 만들고 실행-->
   <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
-        <!-- Apache Maven 에서 Spring Boot 지원을 제공.
+        <!-- Apache Maven 에서 Spring Boot 지원을 제공
         통합 테스트를 실행하기 전에 실행 가능한 jar 또는 war
         (jar or war: 컴파일된 클래스 뿐만 아니라 코드 실행) 아카이브를 패키지
-        Spring Boot 응용 프로그램을 실행하며 빌드 정보를 생성하고 시작할 수 있습니다. -->
+        Spring Boot 응용 프로그램을 실행하며 빌드 정보를 생성하고 시작할 수 있음 -->
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
