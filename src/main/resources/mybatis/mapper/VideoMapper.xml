@@ -11,17 +11,42 @@
   </insert>
 
   <insert id="insertDetailInfo" parameterType="VideoDto">
-    INSERT INTO video (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
-    VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
+    INSERT INTO video (
+    user_id,
+    title,
+    detail_contents,
+    created_at,
+    updated_at,
+    like_count,
+    bad_count,
+    hits)
+    VALUES (#{userId},
+    #{title},
+    #{detailContents},
+    now(),
+    now(),
+    0,
+    0,
+    0)
   </insert>
 
   <!-- 동영상 url 확인 -->
-  <select id="findByVideoUrl" resultType="VideoDto">
-    SELECT file_url "fileUrl" FROM video_file WHERE id=#{id}
+  <select id="findVideoUrlById" resultType="VideoDto">
+    SELECT file_url "fileUrl"
+    FROM video_file
+    WHERE id=#{id}
   </select>
 
   <!-- 동영상 세부사항 확인 -->
-  <select id="findByMoreDetail" resultType="VideoDto">
-    SELECT user_id, title, detail_contents, updated_at, like_count, bad_count, hits FROM video WHERE id=#{id}
+  <select id="findDetailInfoById" resultType="VideoDto">
+    SELECT user_id,
+    title,
+    detail_contents,
+    updated_at,
+    like_count,
+    bad_count,
+    hits
+    FROM video
+    WHERE id=#{id}
   </select>
 </mapper>

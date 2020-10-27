@@ -35,14 +35,4 @@ public class VideoDto {
 
   private long fileSize;
 
-  public VideoDto(int id) {
-
-    this.id = id;
-  }
-
-  public VideoDto(String fileUrl) {
-
-    this.fileUrl = fileUrl;
-  }
-
 }

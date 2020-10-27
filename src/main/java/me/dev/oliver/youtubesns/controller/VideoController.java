@@ -34,26 +34,15 @@ public class VideoController {
   }
   
   /**
-   * video를 보기 위한 내용물을 모두 가져온다.
+   * video를 보기 위한 컨텐츠를 모두 가져옴
    *
-   * @param id
-   * @return
+   * @param id DB에서 동영상 넘버링한 값을 넣어줌
+   * @return 비디오를 시청하기 위한 정보들을 리턴
    */
-  @GetMapping("{id}/videoUrl")
-  public VideoDto videoUrl(@PathVariable int id) {
+  @GetMapping("{id}")
+  public VideoDto watchVideo(@PathVariable int id) {
 
-    return videoService.findByVideoUrl(id);
-  }
-
-  /**
-   *
-   * @param id
-   * @return
-   */
-  @GetMapping("{id}/more-detail")
-  public VideoDto moreDetail(@PathVariable int id) {
-
-    return videoService.findByMoreDetail(id);
+    return videoService.watchVideo(id);
   }
 
 }
