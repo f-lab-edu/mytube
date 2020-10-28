@@ -42,7 +42,7 @@ public class VideoService {
 
     if (fileName.isEmpty()) {
       log.error("uploadVideo 메서드에서 {} file을 불러오던 중 null 값이 확인되었습니다", fileName);
-      throw new IllegalArgumentException("file을 불러오지 못하여 에러가 발생했습니다.");
+      throw new IllegalArgumentException("서버에서 파일을 불러오지 못하여 에러가 발생했습니다.");
     }
 
     File targetFile = new File(videoPropertiesConfig.getFilePath(), fileName);
