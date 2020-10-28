@@ -41,7 +41,7 @@ public class VideoService {
     String fileName = multipartFile.getOriginalFilename();
 
     if (fileName.isEmpty()) {
-      log.error("insertVideo 메서드에서 {} file을 불러오던 중 null 값이 확인되었습니다", fileName);
+      log.error("uploadVideo 메서드에서 {} file을 불러오던 중 null 값이 확인되었습니다", fileName);
       throw new IllegalArgumentException("file을 불러오지 못하여 에러가 발생했습니다.");
     }
 
@@ -62,7 +62,7 @@ public class VideoService {
       videoMapper.insertVideo(videoDto);
       videoMapper.insertDetailInfo(videoDto);
     } catch (IOException e) {
-      log.error("insertVideo 메서드에서 {} file 처리 중 에러가 발생했습니다, 에러 메시지 : {}", fileName, e.getMessage());
+      log.error("uploadVideo 메서드에서 {} file 처리 중 에러가 발생했습니다, 에러 메시지 : {}", fileName, e.getMessage());
       throw new IllegalStateException("서버에서 파일 처리중 예상치 못한 에러가 발생했습니다");
     }
   }
