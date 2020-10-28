@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.youtubesns.config.VideoPropertiesConfig;
+import me.dev.oliver.youtubesns.config.VideoConfig;
 import me.dev.oliver.youtubesns.dto.VideoDto;
 import me.dev.oliver.youtubesns.mapper.VideoMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +23,7 @@ public class VideoService {
 
   private final VideoMapper videoMapper;
   @Value("${video.file.path}")
-  private VideoPropertiesConfig videoPropertiesConfig;
+  private VideoConfig videoConfig;
 
   /**
    * 동영상 업로드, file size는 byte 단위로 저장됨 동영상 컨텐츠 내의 세부사항 기록 db에 저장
@@ -45,7 +45,7 @@ public class VideoService {
       throw new IllegalArgumentException("서버에서 파일을 불러오지 못하여 에러가 발생했습니다.");
     }
 
-    File targetFile = new File(videoPropertiesConfig.getFilePath(), fileName);
+    File targetFile = new File(videoConfig.getFilePath(), fileName);
 
     try {
       multipartFile.transferTo(targetFile);
