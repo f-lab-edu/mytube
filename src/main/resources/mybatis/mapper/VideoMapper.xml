@@ -20,7 +20,8 @@
     like_count,
     bad_count,
     hits)
-    VALUES (#{userId},
+    VALUES (
+    #{userId},
     #{title},
     #{detailContents},
     now(),
