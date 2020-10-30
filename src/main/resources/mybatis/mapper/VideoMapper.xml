@@ -5,29 +5,33 @@
 <mapper namespace="me.dev.oliver.mytubesns.mapper.VideoMapper">
 
   <insert id="insertVideo">
-    INSERT INTO video_file (file_url, file_size)
-    VALUES (#{fileUrl}, #{fileSize})
+    INSERT INTO video_file (
+      file_url,
+      file_size)
+    VALUES (
+      #{fileUrl},
+      #{fileSize})
   </insert>
 
   <insert id="insertDetailInfo" parameterType="VideoDto">
     INSERT INTO video (
-    user_id,
-    title,
-    detail_contents,
-    created_at,
-    updated_at,
-    like_count,
-    bad_count,
-    hits)
+      user_id,
+      title,
+      detail_contents,
+      created_at,
+      updated_at,
+      like_count,
+      bad_count,
+      hits)
     VALUES (
-    #{userId},
-    #{title},
-    #{detailContents},
-    now(),
-    now(),
-    0,
-    0,
-    0)
+      #{userId},
+      #{title},
+      #{detailContents},
+      now(),
+      now(),
+      0,
+      0,
+      0)
   </insert>
 
 </mapper>
