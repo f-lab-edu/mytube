@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.dev.oliver.youtubesns.mapper.VideoMapper">
+<mapper namespace="me.dev.oliver.mytubesns.mapper.VideoMapper">
 
   <!-- 동영상 파일 내용 업로드 -->
-  <insert id="insertVideo">
+  <insert id="insertVideo" parameterType="VideoUploadDto">
     INSERT INTO video_file (file_url, file_size)
     VALUES (#{fileUrl}, #{fileSize})
   </insert>
 
-  <insert id="insertDetailInfo" parameterType="VideoDto">
+  <insert id="insertDetailInfo" parameterType="VideoUploadDto">
     INSERT INTO video (
     user_id,
     title,
@@ -31,20 +31,21 @@
   </insert>
 
   <!-- 동영상 url 확인 -->
-  <select id="findVideoUrlById" resultType="VideoDto">
+  <select id="findVideoUrlById" resultType="String">
     SELECT file_url "fileUrl"
     FROM video_file
     WHERE id=#{id}
   </select>
 
   <!-- 동영상 세부사항 확인 -->
-  <select id="findDetailInfoById" resultType="VideoDto">
-    SELECT user_id,
+  <select id="findDetailInfoById" resultType="VideoWatchDto">
+    SELECT
+    user_id "userId",
     title,
-    detail_contents,
-    updated_at,
-    like_count,
-    bad_count,
+    detail_contents "detailContents",
+    updated_at "updatedAt",
+    like_count "likeCount",
+    bad_count "badCount",
     hits
     FROM video
     WHERE id=#{id}

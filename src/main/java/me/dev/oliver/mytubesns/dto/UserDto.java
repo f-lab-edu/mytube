@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.dto;
+package me.dev.oliver.mytubesns.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.dev.oliver.youtubesns.mapper.UserMapper">
+<mapper namespace="me.dev.oliver.mytubesns.mapper.UserMapper">
   <!-- *는 되도록이면 피하자. 가독성이 떨어지고, 성능저하가 됨.
   비록 이것이 적기 편할 수 있지만, 쿼리를 완료하기 위해서 더 많은 시간을 필요로 한다.
   필요한 일부 컬럼만을 선택함으로써 결과 테이블의 크기를 줄이고 네트워크 트래픽을 감소시킴으로써 쿼리의 평균 속도를 높일 수 있다.-->

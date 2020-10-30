@@ -1,8 +1,8 @@
-package me.dev.oliver.youtubesns.controller;
+package me.dev.oliver.mytubesns.controller;
 
 import lombok.AllArgsConstructor;
-import me.dev.oliver.youtubesns.dto.UserDto;
-import me.dev.oliver.youtubesns.service.UserLoginService;
+import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytubesns.service.UserLoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

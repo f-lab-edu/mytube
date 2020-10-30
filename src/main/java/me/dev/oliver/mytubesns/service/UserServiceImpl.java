@@ -1,12 +1,11 @@
-package me.dev.oliver.youtubesns.service;
+package me.dev.oliver.mytubesns.service;
 
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.youtubesns.dto.UserDto;
-import me.dev.oliver.youtubesns.mapper.UserMapper;
-import me.dev.oliver.youtubesns.util.SecurityUtil;
-import org.apache.ibatis.jdbc.Null;
+import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytubesns.mapper.UserMapper;
+import me.dev.oliver.mytubesns.util.SecurityUtil;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

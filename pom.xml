@@ -11,10 +11,10 @@
   </parent>
   <groupId>me.dev.oliver</groupId>
   <!-- artifactId: 다른 프로젝트에서 참조하는 이름 -->
-  <artifactId>youtube-sns</artifactId>
+  <artifactId>mytube-sns</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <!-- name: 현재 프로젝트 이름 -->
-  <name>youtube-sns</name>
+  <name>mytube-sns</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>

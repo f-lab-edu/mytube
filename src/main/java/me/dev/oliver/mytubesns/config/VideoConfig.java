@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.config;
+package me.dev.oliver.mytubesns.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

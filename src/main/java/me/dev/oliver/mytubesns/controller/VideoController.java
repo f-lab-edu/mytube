@@ -1,9 +1,9 @@
-package me.dev.oliver.youtubesns.controller;
+package me.dev.oliver.mytubesns.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.dev.oliver.youtubesns.dto.VideoDto;
-import me.dev.oliver.youtubesns.service.VideoService;
+import me.dev.oliver.mytubesns.dto.VideoWatchDto;
+import me.dev.oliver.mytubesns.service.VideoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +40,7 @@ public class VideoController {
    * @return 비디오를 시청하기 위한 정보들을 리턴
    */
   @GetMapping("{id}")
-  public VideoDto watchVideo(@PathVariable int id) {
+  public VideoWatchDto watchVideo(@PathVariable int id) {
 
     return videoService.watchVideo(id);
   }
