@@ -1,9 +1,9 @@
-package me.dev.oliver.youtubesns.service;
+package me.dev.oliver.mytubesns.service;
 
 import lombok.AllArgsConstructor;
-import me.dev.oliver.youtubesns.dto.UserDto;
-import me.dev.oliver.youtubesns.util.SecurityUtil;
-import me.dev.oliver.youtubesns.util.SessionKeys;
+import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytubesns.util.SecurityUtil;
+import me.dev.oliver.mytubesns.util.SessionKeys;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor

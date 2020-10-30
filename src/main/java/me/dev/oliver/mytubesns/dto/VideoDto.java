@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.dto;
+package me.dev.oliver.mytubesns.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.Builder;

@@ -1,8 +1,8 @@
-package me.dev.oliver.youtubesns.controller;
+package me.dev.oliver.mytubesns.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.dev.oliver.youtubesns.service.VideoService;
+import me.dev.oliver.mytubesns.service.VideoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

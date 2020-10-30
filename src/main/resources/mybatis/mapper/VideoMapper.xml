@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.dev.oliver.youtubesns.mapper.VideoMapper">
+<mapper namespace="me.dev.oliver.mytubesns.mapper.VideoMapper">
 
   <insert id="insertVideo">
     INSERT INTO video_file (file_url, file_size)
@@ -10,8 +10,24 @@
   </insert>
 
   <insert id="insertDetailInfo" parameterType="VideoDto">
-    INSERT INTO video (user_id, title, detail_contents, created_at, updated_at, like_count, bad_count, hits)
-    VALUES (#{userId}, #{title}, #{detailContents}, now(), now(), 0, 0, 0)
+    INSERT INTO video (
+    user_id,
+    title,
+    detail_contents,
+    created_at,
+    updated_at,
+    like_count,
+    bad_count,
+    hits)
+    VALUES (
+    #{userId},
+    #{title},
+    #{detailContents},
+    now(),
+    now(),
+    0,
+    0,
+    0)
   </insert>
 
 </mapper>
