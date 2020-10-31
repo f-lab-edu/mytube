@@ -2,7 +2,6 @@ package me.dev.oliver.mytubesns.dto;
 
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
