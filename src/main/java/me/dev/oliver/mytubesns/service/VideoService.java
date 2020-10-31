@@ -74,20 +74,7 @@ public class VideoService {
   @LoginValidation
   public VideoWatchDto getVideoInfoById(int id) {
 
-    String videoFileUrl = videoMapper.findVideoUrlById(id);
-    VideoWatchDto videoDetailInfos = videoMapper.findDetailInfoById(id);
-
-    return VideoWatchDto.builder()
-        .id(id)
-        .fileUrl(videoFileUrl)
-        .userId(videoDetailInfos.getUserId())
-        .title(videoDetailInfos.getTitle())
-        .detailContents(videoDetailInfos.getDetailContents())
-        .updatedAt(videoDetailInfos.getUpdatedAt())
-        .likeCount(videoDetailInfos.getLikeCount())
-        .badCount(videoDetailInfos.getLikeCount())
-        .hits(videoDetailInfos.getHits())
-        .build();
+    return videoMapper.findVideoInfoById(id);
   }
 
 }

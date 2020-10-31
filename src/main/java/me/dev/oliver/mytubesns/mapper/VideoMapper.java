@@ -13,7 +13,5 @@ public interface VideoMapper {
 
   int insertDetailInfo(VideoUploadDto videoUploadDto);
 
-  String findVideoUrlById(int id);
-
-  VideoWatchDto findDetailInfoById(int id);
+  VideoWatchDto findVideoInfoById(int id);
 }
