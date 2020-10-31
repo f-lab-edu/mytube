@@ -45,13 +45,13 @@
   <!-- 동영상 세부사항 확인 -->
   <select id="findDetailInfoById" resultType="VideoWatchDto">
     SELECT
-    user_id "userId",
-    title,
-    detail_contents "detailContents",
-    updated_at "updatedAt",
-    like_count "likeCount",
-    bad_count "badCount",
-    hits
+      user_id "userId",
+      title,
+      detail_contents "detailContents",
+      updated_at "updatedAt",
+      like_count "likeCount",
+      bad_count "badCount",
+      hits
     FROM video
     WHERE id=#{id}
   </select>
