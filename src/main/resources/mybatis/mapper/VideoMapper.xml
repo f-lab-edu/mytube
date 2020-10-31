@@ -6,29 +6,33 @@
 
   <!-- 동영상 파일 내용 업로드 -->
   <insert id="insertVideo" parameterType="VideoUploadDto">
-    INSERT INTO video_file (file_url, file_size)
-    VALUES (#{fileUrl}, #{fileSize})
+    INSERT INTO video_file (
+      file_url,
+      file_size)
+    VALUES (
+      #{fileUrl},
+      #{fileSize})
   </insert>
 
   <insert id="insertDetailInfo" parameterType="VideoUploadDto">
     INSERT INTO video (
-    user_id,
-    title,
-    detail_contents,
-    created_at,
-    updated_at,
-    like_count,
-    bad_count,
-    hits)
+      user_id,
+      title,
+      detail_contents,
+      created_at,
+      updated_at,
+      like_count,
+      bad_count,
+      hits)
     VALUES (
-    #{userId},
-    #{title},
-    #{detailContents},
-    now(),
-    now(),
-    0,
-    0,
-    0)
+      #{userId},
+      #{title},
+      #{detailContents},
+      now(),
+      now(),
+      0,
+      0,
+      0)
   </insert>
 
   <!-- 동영상 url 확인 -->
