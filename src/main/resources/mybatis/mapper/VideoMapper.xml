@@ -46,7 +46,11 @@
       v.bad_count "badCount",
       v.hits,
       vf.file_url "fileUrl"
-    FROM video v, video_file vf
-    WHERE id=#{id} and vf.id=#{id}
+    FROM
+        video v,
+        video_file vf
+    WHERE
+        v.id=#{id} and
+        vf.id=#{id}
   </select>
 </mapper>
