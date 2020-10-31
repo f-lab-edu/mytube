@@ -2,14 +2,18 @@ package me.dev.oliver.mytubesns.dto;
 
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Builder
+@Setter
+@AllArgsConstructor
 public class VideoWatchDto {
 
-  private final Integer id;
+  private final int id;
 
   private final String userId;
 
@@ -25,9 +29,9 @@ public class VideoWatchDto {
 
   private final LocalDate updatedAt;
 
-  private final Integer likeCount;
+  private final int likeCount;
 
-  private final Integer badCount;
+  private final int badCount;
 
   /**
    * 조회수

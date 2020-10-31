@@ -40,9 +40,9 @@ public class VideoController {
    * @return 비디오를 시청하기 위한 정보들을 리턴
    */
   @GetMapping("{id}")
-  public VideoWatchDto watchVideo(@PathVariable int id) {
+  public VideoWatchDto getVideoInfoById(@PathVariable int id) {
 
-    return videoService.watchVideo(id);
+    return videoService.getVideoInfoById(id);
   }
 
 }

@@ -70,9 +70,9 @@ public class VideoService {
     }
   }
 
-  @LoginValidation
   @Transactional
-  public VideoWatchDto watchVideo(int id) {
+  @LoginValidation
+  public VideoWatchDto getVideoInfoById(int id) {
 
     String videoFileUrl = videoMapper.findVideoUrlById(id);
     VideoWatchDto videoDetailInfos = videoMapper.findDetailInfoById(id);
