@@ -72,9 +72,9 @@ public class VideoService {
 
   @Transactional
   @LoginValidation
-  public VideoWatchDto getVideoInfoById(int id) {
+  public VideoWatchDto getVideoInfo(int id) {
 
-    return videoMapper.findVideoInfoById(id);
+    return videoMapper.findVideoInfo(id);
   }
 
 }

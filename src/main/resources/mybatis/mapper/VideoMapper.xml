@@ -36,7 +36,7 @@
   </insert>
 
   <!-- 동영상 세부사항 확인 -->
-  <select id="findVideoInfoById" resultType="VideoWatchDto">
+  <select id="findVideoInfo" resultType="VideoWatchDto">
     SELECT
       v.user_id "userId",
       v.title,

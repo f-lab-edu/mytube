@@ -13,5 +13,5 @@ public interface VideoMapper {
 
   int insertDetailInfo(VideoUploadDto videoUploadDto);
 
-  VideoWatchDto findVideoInfoById(int id);
+  VideoWatchDto findVideoInfo(int id);
 }

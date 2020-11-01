@@ -17,8 +17,6 @@ public class VideoWatchDto {
 
   private final String fileUrl;
 
-  private LocalDateTime createdAt;
-
   private final LocalDateTime updatedAt;
 
   private final int likeCount;
