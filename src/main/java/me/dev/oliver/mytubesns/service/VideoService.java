@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytubesns.aop.LoginValidation;
 import me.dev.oliver.mytubesns.config.VideoConfig;
-import me.dev.oliver.mytubesns.dto.VideoDto;
+import me.dev.oliver.mytubesns.dto.VideoUploadDto;
+import me.dev.oliver.mytubesns.dto.VideoWatchDto;
 import me.dev.oliver.mytubesns.mapper.VideoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,19 +60,26 @@ public class VideoService {
       String fileUrl = targetFile.toURI().toURL().getFile();
       long fileSize = multipartFile.getSize();
 
-      VideoDto videoDto = VideoDto.builder()
+      VideoUploadDto videoUploadDto = VideoUploadDto.builder()
           .userId(userId)
           .title(title)
           .detailContents(detailContents)
           .fileUrl(fileUrl)
           .fileSize(fileSize)
           .build();
-      videoMapper.insertVideo(videoDto);
-      videoMapper.insertDetailInfo(videoDto);
+      videoMapper.insertVideo(videoUploadDto);
+      videoMapper.insertDetailInfo(videoUploadDto);
     } catch (IOException e) {
       log.error("uploadVideo 메서드에서 {} file 처리 중 에러가 발생했습니다", fileName, e);
       throw new IllegalStateException("서버에서 파일 처리중 예상치 못한 에러가 발생했습니다");
     }
+  }
+
+  @Transactional
+  @LoginValidation
+  public VideoWatchDto getVideoInfo(int id) {
+
+    return videoMapper.findVideoInfo(id);
   }
 
 }

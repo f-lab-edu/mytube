@@ -4,7 +4,8 @@
 
 <mapper namespace="me.dev.oliver.mytubesns.mapper.VideoMapper">
 
-  <insert id="insertVideo">
+  <!-- 동영상 파일 내용 업로드 -->
+  <insert id="insertVideo" parameterType="VideoUploadDto">
     INSERT INTO video_file (
       file_url,
       file_size)
@@ -13,7 +14,7 @@
       #{fileSize})
   </insert>
 
-  <insert id="insertDetailInfo" parameterType="VideoDto">
+  <insert id="insertDetailInfo" parameterType="VideoUploadDto">
     INSERT INTO video (
       user_id,
       title,
@@ -34,4 +35,22 @@
       0)
   </insert>
 
+  <!-- 동영상 세부사항 확인 -->
+  <select id="findVideoInfo" resultType="VideoWatchDto">
+    SELECT
+      v.user_id "userId",
+      v.title,
+      v.detail_contents "detailContents",
+      v.updated_at "updatedAt",
+      v.like_count "likeCount",
+      v.bad_count "badCount",
+      v.hits,
+      vf.file_url "fileUrl"
+    FROM
+        video v,
+        video_file vf
+    WHERE
+        v.id=#{id} and
+        vf.id=#{id}
+  </select>
 </mapper>

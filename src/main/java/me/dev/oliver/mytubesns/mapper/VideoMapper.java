@@ -1,6 +1,7 @@
 package me.dev.oliver.mytubesns.mapper;
 
-import me.dev.oliver.mytubesns.dto.VideoDto;
+import me.dev.oliver.mytubesns.dto.VideoUploadDto;
+import me.dev.oliver.mytubesns.dto.VideoWatchDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface VideoMapper {
 
-  int insertVideo(VideoDto videoDto);
+  int insertVideo(VideoUploadDto videoUploadDto);
 
-  int insertDetailInfo(VideoDto videoDto);
+  int insertDetailInfo(VideoUploadDto videoUploadDto);
+
+  VideoWatchDto findVideoInfo(int id);
 }
