@@ -16,6 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
  * {@literal @RequiredArgsConstructor} : final로 선언된 필드, NonNull 어노테이션을 사용한 필드만을 필요로 하는 생성자를 만듦
  * VideoProperties를 생성자 주입을 선택한 이유는 Value String 변수에 어노테이션만 사용하면 immutaeble(불변성)이 아니라는 문제가 있으므로 생성자로
  * 주입을 함
+ * <p>
+ * {@literal @Transactional} : AOP 프록시를 통해 활성화 되고 내부에는 PlatformTransactionManager 구현과
+ * TransactionInterceptor 를 이용하여 메서드 호출을 중심으로 AOP 프록시를 생성. Transactional 어노테이션을 선언적 트랜잭션이라 함. 사용할 때
+ * 속성을 설정하지 않으면 기본으로 설정되어있는 속성들로 설정되어 생략이 가능. 트랜잭션의 동작방식에 영향을 줄수 있는 4가지 속성으로 TransactionAttributes
+ * 프로퍼티를 통해 전파(propagation), 격리수준(isolation level), 제한시간(time out), 읽기 전용(read only)을 설정할 수 있음.
  */
 @Slf4j
 @RequiredArgsConstructor
