@@ -75,7 +75,6 @@ public class VideoService {
     }
   }
 
-  @Transactional
   @LoginValidation
   public VideoWatchDto getVideoInfo(int id) {
 
