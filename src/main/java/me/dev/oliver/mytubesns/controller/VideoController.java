@@ -42,7 +42,7 @@ public class VideoController {
   @GetMapping("{id}")
   public VideoWatchDto getVideoInfo(@PathVariable int id) {
 
-    return videoService.getVideoInfoById(id);
+    return videoService.getVideoInfo(id);
   }
 
 }
