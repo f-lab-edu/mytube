@@ -1,7 +1,7 @@
-package me.dev.oliver.youtubesns.aop;
+package me.dev.oliver.mytubesns.aop;
 
 import lombok.AllArgsConstructor;
-import me.dev.oliver.youtubesns.service.LoginService;
+import me.dev.oliver.mytubesns.service.LoginService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class LoginValidationAspect {
 
   private final LoginService loginService;
 
-  @Before("@annotation(LoginValidation)")
+  @Before("@annotation(me.dev.oliver.mytubesns.aop.LoginValidation)")
   public void userLoginValidation() {
 
     String userId = loginService.getLoginId();

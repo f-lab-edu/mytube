@@ -1,4 +1,4 @@
-package me.dev.oliver.youtubesns.aop;
+package me.dev.oliver.mytubesns.aop;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

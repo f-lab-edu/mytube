@@ -1,0 +1,5 @@
+# .yml을 사용함으로써 계층 구조로 설정 값을 표현, 들여쓰기, 띄어쓰기로 구분하여 보기 편리함, prefix의 중복 제거가 가능
+# .yml을 사용하기 위해서는 SnakeYAML 라이브러리가 classpath에 존재해야 함, spring-boot-starter 의존성은 이 라이브러리를 기본적으로 제공
+video:
+  file:
+    path: E:\test
