@@ -1,7 +1,7 @@
-package me.dev.oliver.mytubesns.mapper;
+package me.dev.oliver.mytube.mapper;
 
-import me.dev.oliver.mytubesns.dto.VideoUploadDto;
-import me.dev.oliver.mytubesns.dto.VideoWatchDto;
+import me.dev.oliver.mytube.dto.VideoUploadDto;
+import me.dev.oliver.mytube.dto.VideoWatchDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

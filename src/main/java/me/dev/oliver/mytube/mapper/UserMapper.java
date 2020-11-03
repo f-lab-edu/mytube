@@ -1,6 +1,6 @@
-package me.dev.oliver.mytubesns.mapper;
+package me.dev.oliver.mytube.mapper;
 
-import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytube.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

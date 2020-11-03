@@ -1,6 +1,6 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
-import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytube.dto.UserDto;
 
 public interface UserService {
 

@@ -1,4 +1,4 @@
-package me.dev.oliver.mytubesns.config;
+package me.dev.oliver.mytube.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

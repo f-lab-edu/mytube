@@ -1,14 +1,14 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
 import java.io.File;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.mytubesns.aop.LoginValidation;
-import me.dev.oliver.mytubesns.config.VideoConfig;
-import me.dev.oliver.mytubesns.dto.VideoUploadDto;
-import me.dev.oliver.mytubesns.dto.VideoWatchDto;
-import me.dev.oliver.mytubesns.mapper.VideoMapper;
+import me.dev.oliver.mytube.aop.LoginValidation;
+import me.dev.oliver.mytube.config.VideoConfig;
+import me.dev.oliver.mytube.dto.VideoUploadDto;
+import me.dev.oliver.mytube.dto.VideoWatchDto;
+import me.dev.oliver.mytube.mapper.VideoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

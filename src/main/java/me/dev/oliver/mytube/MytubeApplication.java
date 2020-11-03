@@ -1,13 +1,13 @@
-package me.dev.oliver.mytubesns;
+package me.dev.oliver.mytube;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MytubeSnsApplication {
+public class MytubeApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(MytubeSnsApplication.class, args);
+    SpringApplication.run(MytubeApplication.class, args);
   }
 
 }

@@ -1,6 +1,4 @@
-package me.dev.oliver.mytubesns.util;
-
-import com.mysql.cj.Session;
+package me.dev.oliver.mytube.util;
 
 public class SessionKeys {
 

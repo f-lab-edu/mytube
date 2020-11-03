@@ -1,4 +1,4 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
 public interface LoginService {
 
