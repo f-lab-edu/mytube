@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.dev.oliver.mytubesns.mapper.VideoMapper">
+<mapper namespace="me.dev.oliver.mytube.mapper.VideoMapper">
 
   <!-- 동영상 파일 내용 업로드 -->
   <insert id="insertVideo" parameterType="VideoUploadDto">

@@ -1,4 +1,4 @@
-package me.dev.oliver.mytubesns.util;
+package me.dev.oliver.mytube.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,11 +1,11 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.mytubesns.dto.UserDto;
-import me.dev.oliver.mytubesns.mapper.UserMapper;
-import me.dev.oliver.mytubesns.util.SecurityUtil;
+import me.dev.oliver.mytube.dto.UserDto;
+import me.dev.oliver.mytube.mapper.UserMapper;
+import me.dev.oliver.mytube.util.SecurityUtil;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

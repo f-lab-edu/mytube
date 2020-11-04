@@ -1,9 +1,9 @@
-package me.dev.oliver.mytubesns.controller;
+package me.dev.oliver.mytube.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.dev.oliver.mytubesns.dto.VideoWatchDto;
-import me.dev.oliver.mytubesns.service.VideoService;
+import me.dev.oliver.mytube.dto.VideoWatchDto;
+import me.dev.oliver.mytube.service.VideoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

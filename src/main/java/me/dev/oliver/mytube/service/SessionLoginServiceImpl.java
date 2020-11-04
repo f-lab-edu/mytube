@@ -1,9 +1,9 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.mytubesns.util.SessionKeys;
+import me.dev.oliver.mytube.util.SessionKeys;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

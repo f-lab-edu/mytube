@@ -1,11 +1,11 @@
-package me.dev.oliver.mytubesns.controller;
+package me.dev.oliver.mytube.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.mytubesns.aop.LoginValidation;
-import me.dev.oliver.mytubesns.dto.UserDto;
-import me.dev.oliver.mytubesns.service.UserService;
+import me.dev.oliver.mytube.aop.LoginValidation;
+import me.dev.oliver.mytube.dto.UserDto;
+import me.dev.oliver.mytube.service.UserService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;

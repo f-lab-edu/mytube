@@ -1,6 +1,6 @@
-package me.dev.oliver.mytubesns.service;
+package me.dev.oliver.mytube.service;
 
-import me.dev.oliver.mytubesns.dto.UserDto;
+import me.dev.oliver.mytube.dto.UserDto;
 
 /**
  * 로그인 방식은 토큰 방식, SNS 같은 서드파티 로그인 등 다양하게 확장의 가능성이 있다.
