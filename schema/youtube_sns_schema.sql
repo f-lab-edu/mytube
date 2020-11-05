@@ -62,16 +62,16 @@ CREATE TABLE video_file
 ALTER TABLE video_file COMMENT '동영상 파일';
 
 -- user Table Create SQL
-CREATE TABLE like_bad
+CREATE TABLE like_dislike
 (
     `video_id`  INT         NOT NULL, 
     `user_id`   CHAR(20)    NOT NULL, 
-    `like`      INT         NOT NULL, 
-    `bad`       INT         NOT NULL, 
+    `liked`     BOOLEAN     NOT NULL,
+    `disliked`  BOOLEAN     NOT NULL, 
     PRIMARY KEY (video_id),
     UNIQUE (user_id)
 );
 
-ALTER TABLE like_bad COMMENT '좋아요 싫어요';
+ALTER TABLE like_dislike COMMENT '좋아요 싫어요';
 
         
