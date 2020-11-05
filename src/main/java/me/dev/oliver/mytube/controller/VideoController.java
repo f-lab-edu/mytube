@@ -2,11 +2,13 @@ package me.dev.oliver.mytube.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.service.VideoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,5 +46,29 @@ public class VideoController {
 
     return videoService.getVideoInfo(id);
   }
+
+  /**
+   * 좋아요를 누르지 않았다면 좋아요 정보 추가
+   *
+   * @param videoLikeDto videoId, userId를 입력 받음
+   */
+  @PostMapping("like")
+  public void addLikeCount(@RequestBody VideoLikeDto videoLikeDto) {
+
+    videoService.addLikeCount(videoLikeDto);
+  }
+
+  /**
+   * 싫어요를 누르지 않았다면 싫어요 정보 추가
+   *
+   * @param videoLikeDto videoId, userId를 입력 받음
+   */
+  @PostMapping("dislike")
+  public void addDislikeCount(@RequestBody VideoLikeDto videoLikeDto) {
+
+    videoService.addDislikeCount(videoLikeDto);
+  }
+
+
 
 }

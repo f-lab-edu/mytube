@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytube.aop.LoginValidation;
 import me.dev.oliver.mytube.config.VideoConfig;
+import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoUploadDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.mapper.VideoMapper;
@@ -79,6 +80,40 @@ public class VideoService {
   public VideoWatchDto getVideoInfo(int id) {
 
     return videoMapper.findVideoInfo(id);
+  }
+
+  /**
+   * like 누를 userId와 동영상 videoId 정보 추가
+   * 좋아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   *
+   * @param videoLikeDto videoId, userId 정보
+   */
+  @Transactional
+  @LoginValidation
+  public void addLikeCount(VideoLikeDto videoLikeDto) {
+
+    Boolean isLiked = videoMapper.isLiked(videoLikeDto);
+
+    if (isLiked == null || isLiked == false) {
+      videoMapper.insertLike(videoLikeDto);
+    }
+  }
+
+  /**
+   * dislike 누를 userId와 동영상 videoId 정보 추가
+   * 싫아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   *
+   * @param videoLikeDto videoId, userId 정보
+   */
+  @Transactional
+  @LoginValidation
+  public void addDislikeCount(VideoLikeDto videoLikeDto) {
+
+    Boolean isDisliked = videoMapper.isDisliked(videoLikeDto);
+
+    if (isDisliked == null || isDisliked == false) {
+      videoMapper.insertDislike(videoLikeDto);
+    }
   }
 
 }
