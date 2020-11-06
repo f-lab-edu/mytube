@@ -34,7 +34,7 @@ public class VideoService {
   private final VideoConfig videoConfig;
 
   /**
-   * 동영상 업로드, file size는 byte 단위로 저장됨 동영상 컨텐츠 내의 세부사항 기록 db에 저장
+   * 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장
    *
    * @param multipartFile  게시물 관련 정보를 담은 객체
    * @param userId         회원 아이디
@@ -84,17 +84,18 @@ public class VideoService {
   }
 
   /**
-   * like 누를 userId와 동영상 videoId 정보 추가
-   * 좋아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   * like 누를 userId와 동영상 videoId 정보 추가,
+   * 좋아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의,
    * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음
    *
-   * @param videoLikeDto videoId, userId 정보
+   * @param videoId videoId 정보
+   * @param userId userId 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
-  public void addLikeCount(VideoLikeDto videoLikeDto) {
+  public void addLikeCount(int videoId, String userId) {
 
     try {
-      videoMapper.insertLike(videoLikeDto);
+      videoMapper.insertLike(new VideoLikeDto(videoId, userId));
     } catch (RuntimeException e) {
       if(e.getClass().equals(DuplicateKeyException.class)) {
         // 중복이면 좋아요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!
@@ -106,17 +107,18 @@ public class VideoService {
   }
 
   /**
-   * dislike 누를 userId와 동영상 videoId 정보 추가
-   * 싫어요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
-   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요없음
+   * dislike 누를 userId와 동영상 videoId 정보 추가,
+   * 싫어요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의,
+   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음
    *
-   * @param videoLikeDto videoId, userId 정보
+   * @param videoId videoId 정보
+   * @param userId userId 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
-  public void addDislikeCount(VideoLikeDto videoLikeDto) {
+  public void addDislikeCount(int videoId, String userId) {
 
     try {
-      videoMapper.insertDislike(videoLikeDto);
+      videoMapper.insertDislike(new VideoLikeDto(videoId, userId));
     } catch (RuntimeException e) {
       if(e.getClass().equals(DuplicateKeyException.class)) {
         // 중복이면 싫어요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!

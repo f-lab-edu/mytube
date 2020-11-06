@@ -34,7 +34,7 @@ public class VideoController {
 
     videoService.uploadVideo(multipartFile, userId, title, detailContents);
   }
-  
+
   /**
    * video를 보기 위한 컨텐츠를 모두 가져옴
    *
@@ -49,26 +49,28 @@ public class VideoController {
 
   /**
    * 좋아요를 누르지 않았다면 좋아요 정보 추가
-   * url 리소스를 복수형으로 사용 해야함
    *
-   * @param videoLikeDto videoId, userId를 입력 받음
+   * @param videoId videoId를 입력 받음
+   * @param userId userId를 입력 받음
    */
-  @PostMapping("likes")
-  public void addLikeCount(@RequestBody VideoLikeDto videoLikeDto) {
+  @PostMapping("{videoId}/likes/{userId}")
+  public void addLikeCount(@PathVariable int videoId,
+      @PathVariable String userId) {
 
-    videoService.addLikeCount(videoLikeDto);
+    videoService.addLikeCount(videoId, userId);
   }
 
   /**
    * 싫어요를 누르지 않았다면 싫어요 정보 추가
-   * url 리소스를 복수형으로 사용 해야함
    *
-   * @param videoLikeDto videoId, userId를 입력 받음
+   * @param videoId videoId를 입력 받음
+   * @param userId userId를 입력 받음
    */
-  @PostMapping("dislikes")
-  public void addDislikeCount(@RequestBody VideoLikeDto videoLikeDto) {
+  @PostMapping("{videoId}/dislikes/{userId}")
+  public void addDislikeCount(@PathVariable int videoId,
+      @PathVariable String userId) {
 
-    videoService.addDislikeCount(videoLikeDto);
+    videoService.addDislikeCount(videoId, userId);
   }
 
 }

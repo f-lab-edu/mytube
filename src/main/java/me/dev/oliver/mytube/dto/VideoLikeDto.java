@@ -5,7 +5,12 @@ import lombok.Getter;
 @Getter
 public class VideoLikeDto {
 
-  private int videoId;
+  private final int videoId;
 
-  private String userId;
+  private final String userId;
+
+  public VideoLikeDto(int videoId, String userId) {
+    this.videoId = videoId;
+    this.userId = userId;
+  }
 }
