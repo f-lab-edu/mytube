@@ -48,29 +48,13 @@ public class VideoController {
   }
 
   /**
-   * 좋아요를 누르지 않았다면 좋아요 정보 추가
+   * 좋아요, 싫어요를 누르지 않았다면 좋아요, 싫어요 정보 추가. 단, 두가지중에 한가지만 가능 -> 한번에 좋아요, 싫어요 기능 둘다 클릭 안됌.
    *
-   * @param videoId videoId를 입력 받음
-   * @param userId userId를 입력 받음
+   * @param videoLikeDto videoId, userId, isLiked(사용자가 like를 누르면 true, 싫어요를 누르면 false)를 입력 받음
    */
-  @PostMapping("{videoId}/likes/{userId}")
-  public void addLikeCount(@PathVariable int videoId,
-      @PathVariable String userId) {
+  @PostMapping("like-tastes")
+  public void addLikeCount(@RequestBody VideoLikeDto videoLikeDto) {
 
-    videoService.addLikeCount(videoId, userId);
+    videoService.addLikeCount(videoLikeDto);
   }
-
-  /**
-   * 싫어요를 누르지 않았다면 싫어요 정보 추가
-   *
-   * @param videoId videoId를 입력 받음
-   * @param userId userId를 입력 받음
-   */
-  @PostMapping("{videoId}/dislikes/{userId}")
-  public void addDislikeCount(@PathVariable int videoId,
-      @PathVariable String userId) {
-
-    videoService.addDislikeCount(videoId, userId);
-  }
-
 }

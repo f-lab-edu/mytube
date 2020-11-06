@@ -84,48 +84,21 @@ public class VideoService {
   }
 
   /**
-   * like 누를 userId와 동영상 videoId 정보 추가,
-   * 좋아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의,
-   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음
+   * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가.
+   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
    *
-   * @param videoId videoId 정보
-   * @param userId userId 정보
+   * @param videoLikeDto videoId, userId, isLiked 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
-  public void addLikeCount(int videoId, String userId) {
+  public void addLikeCount(VideoLikeDto videoLikeDto) {
 
     try {
-      videoMapper.insertLike(new VideoLikeDto(videoId, userId));
-    } catch (RuntimeException e) {
-      if(e.getClass().equals(DuplicateKeyException.class)) {
-        // 중복이면 좋아요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!
-      } else {
-        log.error("addLikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
-        throw new IllegalArgumentException("서버에서 좋아요 처리중 예상치 못한 에러가 발생했습니다");
-      }
-    }
-  }
+      videoMapper.insertLike(videoLikeDto);
+    } catch (DuplicateKeyException e) {
 
-  /**
-   * dislike 누를 userId와 동영상 videoId 정보 추가,
-   * 싫어요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의,
-   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음
-   *
-   * @param videoId videoId 정보
-   * @param userId userId 정보
-   * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
-   */
-  public void addDislikeCount(int videoId, String userId) {
-
-    try {
-      videoMapper.insertDislike(new VideoLikeDto(videoId, userId));
     } catch (RuntimeException e) {
-      if(e.getClass().equals(DuplicateKeyException.class)) {
-        // 중복이면 싫어요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!
-      } else {
-        log.error("addDislikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
-        throw new IllegalArgumentException("서버에서 싫어요 처리중 예상치 못한 에러가 발생했습니다");
-      }
+      log.error("addLikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
+      throw new IllegalArgumentException("서버에서 좋아요 처리중 예상치 못한 에러가 발생했습니다");
     }
   }
 

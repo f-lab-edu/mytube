@@ -5,12 +5,11 @@ import lombok.Getter;
 @Getter
 public class VideoLikeDto {
 
-  private final int videoId;
+  private int videoId;
 
-  private final String userId;
+  private String userId;
 
-  public VideoLikeDto(int videoId, String userId) {
-    this.videoId = videoId;
-    this.userId = userId;
-  }
+  // Boolean 타입으로 해야 lombok Getter가 인식함
+  private Boolean isLiked;
+
 }

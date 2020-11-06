@@ -57,18 +57,12 @@
   <insert id="insertLike" parameterType="VideoLikeDto">
     INSERT INTO user_like (
       video_id,
-      user_id)
+      user_id,
+      is_liked)
     VALUES (
       #{videoId},
-      #{userId})
+      #{userId},
+      ${isLiked})
   </insert>
 
-  <insert id="insertDislike" parameterType="VideoLikeDto">
-    INSERT INTO user_dislike (
-      video_id,
-      user_id)
-    VALUES (
-      #{videoId},
-      #{userId})
-  </insert>
 </mapper>
