@@ -68,7 +68,7 @@ CREATE TABLE user_like
 (
     `video_id`  INT         NOT NULL, 
     `user_id`   CHAR(20)    NOT NULL, 
-    `isLiked`	BOOLEAN 	NOT NULL COMMENT 'true ->like클릭, false -> dislike 클릭',
+    `is_liked`	BOOLEAN 	NOT NULL COMMENT 'true -> like클릭, false -> dislike 클릭',
     PRIMARY KEY (video_id, user_id)
 );
 
