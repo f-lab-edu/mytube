@@ -19,8 +19,4 @@ public interface VideoMapper<videoLikeBadDto> {
   int insertLike(VideoLikeDto videoLikeDto);
 
   int insertDislike(VideoLikeDto videoLikeDto);
-
-  Boolean isLiked(VideoLikeDto videoLikeDto);
-
-  Boolean isDisliked(VideoLikeDto videoLikeDto);
 }

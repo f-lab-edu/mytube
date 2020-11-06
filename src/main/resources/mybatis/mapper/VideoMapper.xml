@@ -57,43 +57,18 @@
   <insert id="insertLike" parameterType="VideoLikeDto">
     INSERT INTO user_like (
       video_id,
-      user_id,
-      liked)
+      user_id)
     VALUES (
       #{videoId},
-      #{userId},
-      true)
+      #{userId})
   </insert>
 
   <insert id="insertDislike" parameterType="VideoLikeDto">
     INSERT INTO user_dislike (
       video_id,
-      user_id,
-      disliked)
+      user_id)
     VALUES (
       #{videoId},
-      #{userId},
-      true)
+      #{userId})
   </insert>
-
-  <select id="isLiked" parameterType="VideoLikeDto" resultType="boolean">
-    SELECT
-      IF(liked, true, false) AS liked
-    FROM
-      user_like
-    WHERE
-      video_id=#{videoId} and
-      user_id=#{userId}
-  </select>
-
-  <select id="isDisliked" parameterType="VideoLikeDto" resultType="boolean">
-    SELECT
-      IF(disliked, true, false) AS disliked
-    FROM
-      user_dislike
-    WHERE
-      video_id=#{videoId} and
-      user_id=#{userId}
-  </select>
-
 </mapper>

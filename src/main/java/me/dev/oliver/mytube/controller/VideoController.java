@@ -49,10 +49,11 @@ public class VideoController {
 
   /**
    * 좋아요를 누르지 않았다면 좋아요 정보 추가
+   * url 리소스를 복수형으로 사용 해야함
    *
    * @param videoLikeDto videoId, userId를 입력 받음
    */
-  @PostMapping("like")
+  @PostMapping("likes")
   public void addLikeCount(@RequestBody VideoLikeDto videoLikeDto) {
 
     videoService.addLikeCount(videoLikeDto);
@@ -60,15 +61,14 @@ public class VideoController {
 
   /**
    * 싫어요를 누르지 않았다면 싫어요 정보 추가
+   * url 리소스를 복수형으로 사용 해야함
    *
    * @param videoLikeDto videoId, userId를 입력 받음
    */
-  @PostMapping("dislike")
+  @PostMapping("dislikes")
   public void addDislikeCount(@RequestBody VideoLikeDto videoLikeDto) {
 
     videoService.addDislikeCount(videoLikeDto);
   }
-
-
 
 }

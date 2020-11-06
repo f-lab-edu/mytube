@@ -10,6 +10,7 @@ import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoUploadDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.mapper.VideoMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -85,34 +86,44 @@ public class VideoService {
   /**
    * like 누를 userId와 동영상 videoId 정보 추가
    * 좋아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음
    *
    * @param videoLikeDto videoId, userId 정보
+   * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
-  @Transactional
-  @LoginValidation
   public void addLikeCount(VideoLikeDto videoLikeDto) {
 
-    Boolean isLiked = videoMapper.isLiked(videoLikeDto);
-
-    if (isLiked == null || isLiked == false) {
+    try {
       videoMapper.insertLike(videoLikeDto);
+    } catch (RuntimeException e) {
+      if(e.getClass().equals(DuplicateKeyException.class)) {
+        // 중복이면 좋아요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!
+      } else {
+        log.error("addLikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
+        throw new IllegalArgumentException("서버에서 좋아요 처리중 예상치 못한 에러가 발생했습니다");
+      }
     }
   }
 
   /**
    * dislike 누를 userId와 동영상 videoId 정보 추가
-   * 싫아요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   * 싫어요를 한번도 누르지 않으면 null 값으로 받긴 때문에 null처리 유의
+   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요없음
    *
    * @param videoLikeDto videoId, userId 정보
+   * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
-  @Transactional
-  @LoginValidation
   public void addDislikeCount(VideoLikeDto videoLikeDto) {
 
-    Boolean isDisliked = videoMapper.isDisliked(videoLikeDto);
-
-    if (isDisliked == null || isDisliked == false) {
+    try {
       videoMapper.insertDislike(videoLikeDto);
+    } catch (RuntimeException e) {
+      if(e.getClass().equals(DuplicateKeyException.class)) {
+        // 중복이면 싫어요 취소 하기 기능 추가, 취소하기 이슈에서 진행예정 !!!
+      } else {
+        log.error("addDislikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
+        throw new IllegalArgumentException("서버에서 싫어요 처리중 예상치 못한 에러가 발생했습니다");
+      }
     }
   }
 
