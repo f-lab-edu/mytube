@@ -35,7 +35,6 @@
       0)
   </insert>
 
-  <!-- 동영상 세부사항 확인 -->
   <select id="findVideoInfo" resultType="VideoWatchDto">
     SELECT
       v.user_id "userId",
@@ -53,4 +52,17 @@
         v.id=#{id} and
         vf.id=#{id}
   </select>
+
+  <!-- 동영상 세부사항 확인 -->
+  <insert id="insertLike" parameterType="VideoLikeDto">
+    INSERT INTO user_like (
+      video_id,
+      user_id,
+      is_liked)
+    VALUES (
+      #{videoId},
+      #{userId},
+      ${isLiked})
+  </insert>
+
 </mapper>

@@ -6,9 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytube.aop.LoginValidation;
 import me.dev.oliver.mytube.config.VideoConfig;
+import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoUploadDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.mapper.VideoMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +34,7 @@ public class VideoService {
   private final VideoConfig videoConfig;
 
   /**
-   * 동영상 업로드, file size는 byte 단위로 저장됨 동영상 컨텐츠 내의 세부사항 기록 db에 저장
+   * 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장
    *
    * @param multipartFile  게시물 관련 정보를 담은 객체
    * @param userId         회원 아이디
@@ -79,6 +81,25 @@ public class VideoService {
   public VideoWatchDto getVideoInfo(int id) {
 
     return videoMapper.findVideoInfo(id);
+  }
+
+  /**
+   * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가.
+   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
+   *
+   * @param videoLikeDto videoId, userId, isLiked 정보
+   * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
+   */
+  public void addLikeCount(VideoLikeDto videoLikeDto) {
+
+    try {
+      videoMapper.insertLike(videoLikeDto);
+    } catch (DuplicateKeyException e) {
+
+    } catch (RuntimeException e) {
+      log.error("addLikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
+      throw new IllegalArgumentException("서버에서 좋아요 처리중 예상치 못한 에러가 발생했습니다");
+    }
   }
 
 }

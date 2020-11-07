@@ -2,11 +2,13 @@ package me.dev.oliver.mytube.controller;
 
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.service.VideoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +34,7 @@ public class VideoController {
 
     videoService.uploadVideo(multipartFile, userId, title, detailContents);
   }
-  
+
   /**
    * video를 보기 위한 컨텐츠를 모두 가져옴
    *
@@ -45,4 +47,14 @@ public class VideoController {
     return videoService.getVideoInfo(id);
   }
 
+  /**
+   * 좋아요, 싫어요를 누르지 않았다면 좋아요, 싫어요 정보 추가. 단, 두가지중에 한가지만 가능 -> 한번에 좋아요, 싫어요 기능 둘다 클릭 안됌.
+   *
+   * @param videoLikeDto videoId, userId, isLiked(사용자가 like를 누르면 true, 싫어요를 누르면 false)를 입력 받음
+   */
+  @PostMapping("like-tastes")
+  public void addLikeCount(@RequestBody VideoLikeDto videoLikeDto) {
+
+    videoService.addLikeCount(videoLikeDto);
+  }
 }
