@@ -25,8 +25,6 @@ CREATE TABLE video
     `detail_contents`  VARCHAR(200)    NOT NULL    COMMENT '세부 내용', 
     `created_at`       DATE    		   NOT NULL	   COMMENT '등록 날짜',
     `updated_at`       DATE       	   NOT NULL    COMMENT '업데이트 날짜',
-    `like_count`       INT             NOT NULL    COMMENT '좋아요 개수', 
-    `dislike_count`        INT             NOT NULL    COMMENT '싫어요 개수', 
     `hits`             INT             NOT NULL    COMMENT '조회수', 
     `file_url`		   VARCHAR(45)	   NOT NULL,
     PRIMARY KEY (id)
