@@ -68,7 +68,7 @@ public class VideoService {
       videoMapper.insertVideo(videoUploadDto);
       videoMapper.insertDetailInfo(videoUploadDto);
     } catch (RuntimeException e) {
-      log.error("uploadVideo 메서드에서 {} file 처리 중 에러가 발생했습니다", fileName, e);
+      log.error("uploadVideo 메서드에서 {} file 처리 중 에러가 발생했습니다. s3 활성화 유무와 관련 정보를 확인하십시오", fileName, e);
       throw new IllegalStateException("서버에서 파일 처리중 예상치 못한 에러가 발생했습니다");
     }
   }
