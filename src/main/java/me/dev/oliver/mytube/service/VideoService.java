@@ -1,7 +1,5 @@
 package me.dev.oliver.mytube.service;
 
-import java.io.File;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytube.aop.LoginValidation;
@@ -32,9 +30,10 @@ public class VideoService {
 
   private final VideoMapper videoMapper;
   private final VideoConfig videoConfig;
+  private final AmazonS3Service amazonS3Service;
 
   /**
-   * 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장
+   * amazon s3에 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장.
    *
    * @param multipartFile  게시물 관련 정보를 담은 객체
    * @param userId         회원 아이디
@@ -55,11 +54,8 @@ public class VideoService {
       throw new IllegalArgumentException("서버에서 파일을 불러오지 못하여 에러가 발생했습니다");
     }
 
-    File targetFile = new File(videoConfig.getFilePath(), fileName);
-
     try {
-      multipartFile.transferTo(targetFile);
-      String fileUrl = targetFile.toURI().toURL().getFile();
+      String fileUrl = amazonS3Service.upload(multipartFile);
       long fileSize = multipartFile.getSize();
 
       VideoUploadDto videoUploadDto = VideoUploadDto.builder()
@@ -71,7 +67,7 @@ public class VideoService {
           .build();
       videoMapper.insertVideo(videoUploadDto);
       videoMapper.insertDetailInfo(videoUploadDto);
-    } catch (IOException e) {
+    } catch (RuntimeException e) {
       log.error("uploadVideo 메서드에서 {} file 처리 중 에러가 발생했습니다", fileName, e);
       throw new IllegalStateException("서버에서 파일 처리중 예상치 못한 에러가 발생했습니다");
     }
@@ -84,8 +80,7 @@ public class VideoService {
   }
 
   /**
-   * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가.
-   * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
+   * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가. 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
    *
    * @param videoLikeDto videoId, userId, isLiked 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리

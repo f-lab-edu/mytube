@@ -1,5 +1,6 @@
 package me.dev.oliver.mytube.controller;
 
+import java.io.IOException;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import me.dev.oliver.mytube.dto.VideoLikeDto;
@@ -30,13 +31,13 @@ public class VideoController {
   public void uploadVideo(@RequestParam("fileVideo") MultipartFile multipartFile,
       @Valid @RequestParam String userId,
       @Valid @RequestParam String title,
-      @Valid @RequestParam String detailContents) {
+      @Valid @RequestParam String detailContents) throws IOException {
 
     videoService.uploadVideo(multipartFile, userId, title, detailContents);
   }
 
   /**
-   * video를 보기 위한 컨텐츠를 모두 가져옴
+   * 동영상을 보기 위한 컨텐츠를 모두 가져옴
    *
    * @param id DB에서 동영상 넘버링한 값을 넣어줌
    * @return 비디오를 시청하기 위한 정보들을 리턴
