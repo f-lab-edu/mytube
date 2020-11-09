@@ -49,10 +49,11 @@ CREATE TABLE user_video
 ALTER TABLE user_video COMMENT '유저 동영상 게시글 관련 정보';
 
 -- user Table Create SQL
+-- VARCHAR 최대 저장 길이 21841, 공식적인 문서에서는 MySQL 5.0.3 이후 65535까지 가능
 CREATE TABLE video_file
 (
     `id`         INT            NOT NULL	AUTO_INCREMENT, 
-    `file_url`   VARCHAR(45)    NOT NULL, 
+    `file_url`   VARCHAR(255)    NOT NULL, 
     `file_size`  INT            NOT NULL, 
     PRIMARY KEY (id)
 );
