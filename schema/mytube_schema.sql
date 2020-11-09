@@ -25,8 +25,6 @@ CREATE TABLE video
     `detail_contents`  VARCHAR(200)    NOT NULL    COMMENT '세부 내용', 
     `created_at`       DATE    		   NOT NULL	   COMMENT '등록 날짜',
     `updated_at`       DATE       	   NOT NULL    COMMENT '업데이트 날짜',
-    `like_count`       INT             NOT NULL    COMMENT '좋아요 개수', 
-    `bad_count`        INT             NOT NULL    COMMENT '싫어요 개수', 
     `hits`             INT             NOT NULL    COMMENT '조회수', 
     `file_url`		   VARCHAR(45)	   NOT NULL,
     PRIMARY KEY (id)
@@ -61,4 +59,16 @@ CREATE TABLE video_file
 
 ALTER TABLE video_file COMMENT '동영상 파일';
 
+-- 좋아요 싫어요 삽입, 삭제로 취소 구현
+-- 좋아요 테이블, 싫어요 테이블 생성
+-- user Table Create SQL
+CREATE TABLE user_like
+(
+    `video_id`  INT         NOT NULL, 
+    `user_id`   CHAR(20)    NOT NULL, 
+    `is_liked`	BOOLEAN 	NOT NULL COMMENT 'true -> like클릭, false -> dislike 클릭',
+    PRIMARY KEY (video_id, user_id)
+);
+
+ALTER TABLE user_like COMMENT '유저 좋아요 정보';
         
