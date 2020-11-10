@@ -103,5 +103,6 @@ mvnw.cmd
 .mvn/
 
 # properties & yml
-/**/application-local.properties
-/**/application-aws.yml
+*.properties
+*.yml
+
