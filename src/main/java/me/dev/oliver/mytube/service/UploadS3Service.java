@@ -12,15 +12,20 @@ import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytube.config.AmazonS3Config;
+import me.dev.oliver.mytube.util.AmazonS3Keys;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class AmazonS3Service implements AmazonService {
+public class UploadS3Service implements UploadbleService {
 
-  private final AmazonS3Config amazonS3Config;
+  //private final AmazonS3Config amazonS3Config;
+  @Autowired
+  Environment env;
   private AmazonS3 s3Client;
 
   /**
@@ -28,12 +33,13 @@ public class AmazonS3Service implements AmazonService {
    */
   @PostConstruct
   private void initializeS3Client() {
-    AWSCredentials credentials = new BasicAWSCredentials(amazonS3Config.getAccessKey(),
-        amazonS3Config.getSecretKey());
+    AWSCredentials credentials = new BasicAWSCredentials(env.getProperty(AmazonS3Keys.accessKey),
+        env.getProperty(AmazonS3Keys.secretKey));
 
     s3Client = AmazonS3ClientBuilder.standard()
         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-        .withRegion(amazonS3Config.getRegion())
+        //.withRegion(amazonS3Config.getRegion())
+        .withRegion(env.getProperty(AmazonS3Keys.region))
         .build();
   }
 
@@ -44,7 +50,7 @@ public class AmazonS3Service implements AmazonService {
    */
   public String upload(MultipartFile uploadFile) {
     String fileName = uploadFile.getOriginalFilename();
-    String bucket = amazonS3Config.getBucket();
+    String bucket = env.getProperty(AmazonS3Keys.bucket);
 
     try {
       s3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile.getInputStream(), null)
