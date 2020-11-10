@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.service.VideoService;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,4 +59,5 @@ public class VideoController {
 
     videoService.addLikeCount(videoLikeDto);
   }
+
 }

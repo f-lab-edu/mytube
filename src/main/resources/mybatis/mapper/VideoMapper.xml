@@ -65,4 +65,12 @@
       ${isLiked})
   </insert>
 
+  <delete id="deleteLike" parameterType="VideoLikeDto">
+    DELETE FROM
+      user_like
+    WHERE
+      video_id=#{videoId} and
+      user_id=#{userId}
+  </delete>
+
 </mapper>

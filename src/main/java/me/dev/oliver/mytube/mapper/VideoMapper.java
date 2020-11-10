@@ -18,5 +18,5 @@ public interface VideoMapper<videoLikeBadDto> {
 
   int insertLike(VideoLikeDto videoLikeDto);
 
-  int insertDislike(VideoLikeDto videoLikeDto);
+  int deleteLike(VideoLikeDto videoLikeDto);
 }
