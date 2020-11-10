@@ -29,8 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class VideoService {
 
   private final VideoMapper videoMapper;
-  private final VideoConfig videoConfig;
-  private final UploadS3Service amazonS3Service;
+  private final UploadS3Service uploadS3Service;
 
   /**
    * amazon s3에 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장.
@@ -55,7 +54,7 @@ public class VideoService {
     }
 
     try {
-      String fileUrl = amazonS3Service.upload(multipartFile);
+      String fileUrl = uploadS3Service.upload(multipartFile);
       long fileSize = multipartFile.getSize();
 
       VideoUploadDto videoUploadDto = VideoUploadDto.builder()

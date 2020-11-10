@@ -11,7 +11,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.dev.oliver.mytube.config.AmazonS3Config;
 import me.dev.oliver.mytube.util.AmazonS3Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UploadS3Service implements UploadbleService {
 
-  //private final AmazonS3Config amazonS3Config;
   @Autowired
   Environment env;
   private AmazonS3 s3Client;
@@ -38,7 +36,6 @@ public class UploadS3Service implements UploadbleService {
 
     s3Client = AmazonS3ClientBuilder.standard()
         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-        //.withRegion(amazonS3Config.getRegion())
         .withRegion(env.getProperty(AmazonS3Keys.region))
         .build();
   }
