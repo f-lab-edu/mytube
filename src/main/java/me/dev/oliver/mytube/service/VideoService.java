@@ -3,7 +3,6 @@ package me.dev.oliver.mytube.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.dev.oliver.mytube.aop.LoginValidation;
-import me.dev.oliver.mytube.config.VideoConfig;
 import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoUploadDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
@@ -29,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class VideoService {
 
   private final VideoMapper videoMapper;
-  private final UploadS3Service uploadS3Service;
+  private final S3FileUploadService s3FileUploadService;
 
   /**
    * amazon s3에 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장.
@@ -54,7 +53,7 @@ public class VideoService {
     }
 
     try {
-      String fileUrl = uploadS3Service.upload(multipartFile);
+      String fileUrl = s3FileUploadService.upload(multipartFile);
       long fileSize = multipartFile.getSize();
 
       VideoUploadDto videoUploadDto = VideoUploadDto.builder()

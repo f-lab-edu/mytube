@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UploadS3Service implements UploadbleService {
+public class S3FileUploadService implements FileUploadService {
 
   @Autowired
-  Environment env;
+  private Environment env;
   private AmazonS3 s3Client;
 
   /**
