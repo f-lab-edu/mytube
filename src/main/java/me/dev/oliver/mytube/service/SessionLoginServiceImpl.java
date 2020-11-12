@@ -42,7 +42,10 @@ public class SessionLoginServiceImpl implements LoginService {
   private SessionLoginServiceImpl() {
   }
 
-
+  /**
+   * session 객체를 얻음.
+   * @return session 객체
+   */
   private HttpSession getHttpSession() {
 
     HttpSession session = null;
@@ -52,7 +55,8 @@ public class SessionLoginServiceImpl implements LoginService {
     if (req != null) {
       session = req.getSession();
     } else {
-      log.error("HttpServletRequest 생성 도중에 null이 확인되었습니다");
+      log.error(
+          "getHttpSession() 메서드에서 RequestContextHolder를 이용하여 HttpServletRequest 접근 도중에 null이 확인되었습니다");
       throw new IllegalArgumentException("서버에서 사용자의 정보를 불러오는 도중 예상치 못한 에러가 발생했습니다");
     }
 
