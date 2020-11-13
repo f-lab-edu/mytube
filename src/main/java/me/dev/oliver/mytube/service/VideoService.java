@@ -88,11 +88,10 @@ public class VideoService {
    * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가.
    * 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
    *
-   * @param videoLikeDto videoId, userId, isLiked(사용자가 like를 누르면 true, 싫어요를 누르면 false) 정보
+   * @param videoLikeDto videoId, userId, LikeType(사용자가 like를 누르면 LIKE, 싫어요를 누르면 DISLIKE) 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
   public void addLikeCount(VideoLikeDto videoLikeDto) {
-
     try {
       videoMapper.insertLike(videoLikeDto);
     } catch (DuplicateKeyException e) {
@@ -108,7 +107,7 @@ public class VideoService {
    *
    * @param videoLikeDto videoId, userId 정보
    */
-  private void cancelLikeCount(VideoLikeDto videoLikeDto) {
+    private void cancelLikeCount(VideoLikeDto videoLikeDto) {
     String userId = videoLikeDto.getUserId();
 
     if(!loginService.getLoginId().equals(userId)) {

@@ -58,11 +58,11 @@
     INSERT INTO user_like (
       video_id,
       user_id,
-      is_liked)
+      like_type)
     VALUES (
       #{videoId},
       #{userId},
-      ${isLiked})
+      #{likeType})
   </insert>
 
   <delete id="deleteLike" parameterType="VideoLikeDto">
