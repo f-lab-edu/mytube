@@ -103,7 +103,6 @@ mvnw.cmd
 .mvn/
 
 # properties & yml
-**/*.properties
-**/*.yml
-
+*.properties
+*.yml
 
