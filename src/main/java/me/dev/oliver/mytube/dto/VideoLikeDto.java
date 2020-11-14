@@ -9,7 +9,11 @@ public class VideoLikeDto {
 
   private String userId;
 
-  // Boolean 타입으로 해야 lombok Getter가 인식함
-  private Boolean isLiked;
+  private LikeType likeType;
+
+  public enum LikeType {
+    DISLIKE, LIKE
+  }
 
 }
+
