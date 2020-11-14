@@ -25,8 +25,6 @@ CREATE TABLE video
     `detail_contents`  VARCHAR(200)    NOT NULL    COMMENT '세부 내용', 
     `created_at`       DATE    		   NOT NULL	   COMMENT '등록 날짜',
     `updated_at`       DATE       	   NOT NULL    COMMENT '업데이트 날짜',
-    `like_count`       INT             NOT NULL    COMMENT '좋아요 개수', 
-    `bad_count`        INT             NOT NULL    COMMENT '싫어요 개수', 
     `hits`             INT             NOT NULL    COMMENT '조회수', 
     `file_url`		   VARCHAR(45)	   NOT NULL,
     PRIMARY KEY (id)
@@ -51,14 +49,27 @@ CREATE TABLE user_video
 ALTER TABLE user_video COMMENT '유저 동영상 게시글 관련 정보';
 
 -- user Table Create SQL
+-- VARCHAR 최대 저장 길이 21841, 공식적인 문서에서는 MySQL 5.0.3 이후 65535까지 가능
 CREATE TABLE video_file
 (
     `id`         INT            NOT NULL	AUTO_INCREMENT, 
-    `file_url`   VARCHAR(45)    NOT NULL, 
+    `file_url`   VARCHAR(21841)    NOT NULL, 
     `file_size`  INT            NOT NULL, 
     PRIMARY KEY (id)
 );
 
 ALTER TABLE video_file COMMENT '동영상 파일';
 
+-- 좋아요 싫어요 삽입, 삭제로 취소 구현
+-- 좋아요 테이블, 싫어요 테이블 생성
+-- user Table Create SQL
+CREATE TABLE user_like
+(
+    `video_id`  INT         NOT NULL, 
+    `user_id`   CHAR(20)    NOT NULL, 
+    `like_type`	CHAR(10) 	NOT NULL,
+    PRIMARY KEY (video_id, user_id)
+);
+
+ALTER TABLE user_like COMMENT '유저 좋아요 정보';
         

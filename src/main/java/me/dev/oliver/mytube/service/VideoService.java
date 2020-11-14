@@ -29,6 +29,7 @@ public class VideoService {
 
   private final VideoMapper videoMapper;
   private final S3FileUploadService s3FileUploadService;
+  private final LoginService loginService;
 
   /**
    * amazon s3에 동영상 업로드 및 file size는 byte 단위로 저장됨, 동영상 컨텐츠 내의 세부사항 기록 db에 저장.
@@ -80,19 +81,32 @@ public class VideoService {
   /**
    * 좋아요, 싫어요 누를 userId와 동영상 videoId 정보 추가. 동영상 보기에서 Login 체크를 했으므로 중복 체크 필요 없음.
    *
-   * @param videoLikeDto videoId, userId, isLiked 정보
+   * @param videoLikeDto videoId, userId, LikeType(사용자가 like를 누르면 LIKE, 싫어요를 누르면 DISLIKE) 정보
    * @throws IllegalArgumentException DuplicateKeyException이 아닌 다른 예외처리
    */
   public void addLikeCount(VideoLikeDto videoLikeDto) {
-
     try {
       videoMapper.insertLike(videoLikeDto);
     } catch (DuplicateKeyException e) {
-
+      cancelLikeCount(videoLikeDto);
     } catch (RuntimeException e) {
       log.error("addLikeCount 메서드에서 예상치 못한 에러가 발생했습니다", e);
       throw new IllegalArgumentException("서버에서 좋아요 처리중 예상치 못한 에러가 발생했습니다");
     }
+  }
+
+  /**
+   * 좋아요나 싫어요 둘중에 하나만 활성화 가능이라서 취소도 간단히 유니크한 primary key 사용.
+   *
+   * @param videoLikeDto videoId, userId 정보
+   */
+    private void cancelLikeCount(VideoLikeDto videoLikeDto) {
+    String userId = videoLikeDto.getUserId();
+
+    if(!loginService.getLoginId().equals(userId)) {
+      throw new IllegalArgumentException(userId + "님은 이 동영상을 업로드한 회원이 아닙니다");
+    }
+    videoMapper.deleteLike(videoLikeDto);
   }
 
 }
