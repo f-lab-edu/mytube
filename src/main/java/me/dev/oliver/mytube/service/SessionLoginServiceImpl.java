@@ -44,6 +44,7 @@ public class SessionLoginServiceImpl implements LoginService {
 
   /**
    * session 객체를 얻음.
+   *
    * @return session 객체
    */
   private HttpSession getHttpSession() {
@@ -56,7 +57,8 @@ public class SessionLoginServiceImpl implements LoginService {
       session = req.getSession();
     } else {
       log.error(
-          "getHttpSession() 메서드에서 RequestContextHolder를 이용하여 HttpServletRequest 접근 도중에 null이 확인되었습니다");
+          "getHttpSession() 메서드에서 HttpServletRequest 접근 중 RequestContextHolder의 getRequestAttributes() 메소드에서 "
+              + "스레드 로컬인 NamedThreadLocal와 NamedInheritableThreadLocal 변수에 null이 확인되었습니다");
       throw new IllegalArgumentException("서버에서 사용자의 정보를 불러오는 도중 예상치 못한 에러가 발생했습니다");
     }
 
