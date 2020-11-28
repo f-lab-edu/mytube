@@ -93,6 +93,11 @@
       <version>1.11.895</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+
   </dependencies>
 
   <!-- maven 의존성을 명시(jar or war 패키징 할 수 있음, 빌드 정보 생성과 프로그램 시작) -->

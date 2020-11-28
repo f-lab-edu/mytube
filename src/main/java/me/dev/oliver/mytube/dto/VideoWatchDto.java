@@ -10,27 +10,32 @@ import lombok.Getter;
  * LocalDateTime, LocalDate, LocalTime은 Java8에 추가 됨. Date 클래스는 Depensive copying하기 위해 밖으로 객체를 내보낼 때
  * 새로운 객체를 만들어 사용했지만 Java8에서 추가된 LocalDateTime은 immutable하여 값이 변경 되지 않아 사용하는데 안전.
  */
+
 @Getter
 public class VideoWatchDto {
 
-  private final String userId;
+  private String userId;
 
   @NotBlank
-  private final String title;
+  private String title;
 
   @NotBlank
-  private final String detailContents;
+  private String detailContents;
 
-  private final String fileUrl;
+  private String fileUrl;
 
-  private final LocalDateTime updatedAt;
+  private LocalDateTime updatedAt;
 
-  private final int likeCount;
+  private int likeCount;
 
-  private final int badCount;
+  private int badCount;
 
   //조회수
-  private final int hits;
+  private int hits;
+
+  public VideoWatchDto() {
+    super();
+  }
 
   public VideoWatchDto(
       String userId,
