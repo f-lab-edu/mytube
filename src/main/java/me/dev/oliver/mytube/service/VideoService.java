@@ -81,9 +81,8 @@ public class VideoService {
    * @param id Video 업로드 리스트 id값
    * @return VideoWatchDto의 필드 변수 데이터 값을 리턴
    */
-  //
   @Cacheable(key = "#id", value = "getVideoInfo", unless = "#result == null")
-  //@LoginValidation
+  @LoginValidation
   public VideoWatchDto getVideoInfo(int id) {
 
     return videoMapper.findVideoInfo(id);

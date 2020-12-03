@@ -31,13 +31,4 @@ class mytubeApplicationTests {
     // no exception thrown
   }
 
-//  @Test
-//  public void setup() {
-//    SimpleModule simpleModule = new SimpleModule();
-//    simpleModule.addSerializer(LocalDateTime.class, new CustomLocalDateTimeSerializer());
-//    ObjectMapper objectMapper = new ObjectMapper();
-//    objectMapper.registerModule(simpleModule);
-//    JacksonTester.initFields(this, objectMapper);
-//  }
-
 }

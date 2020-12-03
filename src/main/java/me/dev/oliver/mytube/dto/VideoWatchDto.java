@@ -2,7 +2,9 @@ package me.dev.oliver.mytube.dto;
 
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * LocalDateTime vs Date
@@ -10,7 +12,8 @@ import lombok.Getter;
  * LocalDateTime, LocalDate, LocalTime은 Java8에 추가 됨. Date 클래스는 Depensive copying하기 위해 밖으로 객체를 내보낼 때
  * 새로운 객체를 만들어 사용했지만 Java8에서 추가된 LocalDateTime은 immutable하여 값이 변경 되지 않아 사용하는데 안전.
  */
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class VideoWatchDto {
 
@@ -33,27 +36,4 @@ public class VideoWatchDto {
   //조회수
   private int hits;
 
-  public VideoWatchDto() {
-    super();
-  }
-
-  public VideoWatchDto(
-      String userId,
-      String title,
-      String detailContents,
-      LocalDateTime updatedAt,
-      int likeCount,
-      int badCount,
-      int hits,
-      String fileUrl) {
-
-    this.userId = userId;
-    this.title = title;
-    this.detailContents = detailContents;
-    this.updatedAt = updatedAt;
-    this.likeCount = likeCount;
-    this.badCount = badCount;
-    this.hits = hits;
-    this.fileUrl = fileUrl;
-  }
 }
