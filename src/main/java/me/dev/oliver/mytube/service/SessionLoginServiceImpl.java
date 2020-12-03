@@ -42,7 +42,11 @@ public class SessionLoginServiceImpl implements LoginService {
   private SessionLoginServiceImpl() {
   }
 
-
+  /**
+   * session 객체를 얻음.
+   *
+   * @return session 객체
+   */
   private HttpSession getHttpSession() {
 
     HttpSession session = null;
@@ -52,7 +56,8 @@ public class SessionLoginServiceImpl implements LoginService {
     if (req != null) {
       session = req.getSession();
     } else {
-      log.error("HttpServletRequest 생성 도중에 null이 확인되었습니다.");
+      log.error("getHttpSession() 메서드에서 HttpServletRequest 접근 중 {}에서 null이 확인 되었습니다 ",
+          Thread.currentThread());
       throw new IllegalArgumentException("서버에서 사용자의 정보를 불러오는 도중 예상치 못한 에러가 발생했습니다");
     }
 
@@ -71,17 +76,23 @@ public class SessionLoginServiceImpl implements LoginService {
   }
 
   /**
-   * userId값을 확인한 후 value값을 반환
+   * userId값을 확인한 후 value값을 반환.
    *
-   * @return key에 대한 value를 return.
+   * @return key에 대한 value를 return
    */
   public String getLoginId() {
 
-    return (String) getHttpSession().getAttribute(SessionKeys.USER_ID);
+    String userId = (String) getHttpSession().getAttribute(SessionKeys.USER_ID);
+    if (userId == null) {
+      log.error("getLoginId 메서드에서 유저 아이디를 가져오는 도중에 null이 확인되었습니다");
+      throw new IllegalArgumentException("서버에서 사용자의 정보를 불러오는 도중 예상치 못한 에러가 발생했습니다");
+    }
+
+    return userId;
   }
 
   /**
-   * 세션을 유효하지 않게 설정 (세션에 저장된 모든 값을 삭제). session.invalidate();
+   * 세션을 유효하지 않게 설정 (세션에 저장된 모든 값을 삭제). session.invalidate()
    */
   public void logout() {
 
