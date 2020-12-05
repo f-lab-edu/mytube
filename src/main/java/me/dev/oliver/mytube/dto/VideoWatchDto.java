@@ -1,5 +1,6 @@
 package me.dev.oliver.mytube.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class VideoWatchDto {
+public class VideoWatchDto implements Serializable {
 
   private String userId;
 
