@@ -98,12 +98,6 @@
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>com.github.kstyrc</groupId>
-      <artifactId>embedded-redis</artifactId>
-      <version>0.6</version>
-    </dependency>
-
   </dependencies>
 
   <!-- maven 의존성을 명시(jar or war 패키징 할 수 있음, 빌드 정보 생성과 프로그램 시작) -->
