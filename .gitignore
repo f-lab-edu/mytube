@@ -106,3 +106,5 @@ mvnw.cmd
 *.properties
 *.yml
 
+# test
+/test/

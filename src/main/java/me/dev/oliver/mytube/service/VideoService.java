@@ -7,6 +7,7 @@ import me.dev.oliver.mytube.dto.VideoLikeDto;
 import me.dev.oliver.mytube.dto.VideoUploadDto;
 import me.dev.oliver.mytube.dto.VideoWatchDto;
 import me.dev.oliver.mytube.mapper.VideoMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +73,15 @@ public class VideoService {
     }
   }
 
+  /**
+   * 동영상 조회 특성상 여러 유저가 접근했을 때 데이터베이스에 데이터 요청 수를 줄이기 위해 caching을 사용.
+   * caching 할 때 key는 id를 사용, value는 getVideoInfo() 메서드의 return 값을 사용함.
+   * unless = "#result == null"  --> 결과가 null이 아닌 경우만 caching 처리.
+   *
+   * @param id Video 업로드 리스트 id값
+   * @return VideoWatchDto의 필드 변수 데이터 값을 리턴
+   */
+  @Cacheable(key = "#id", value = "getVideoInfo", unless = "#result == null")
   @LoginValidation
   public VideoWatchDto getVideoInfo(int id) {
 
